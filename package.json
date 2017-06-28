@@ -1,0 +1,19 @@
+{
+  "name": "moviepedia",
+  "version": "1.0.0",
+  "description": "Project for Movie database",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.15",
+    "q": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Jose G. Annunziato",
+  "license": "ISC"
+}
