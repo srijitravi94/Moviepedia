@@ -22,7 +22,7 @@
         }
 
         function getMovieTrailer() {
-            var link = 'http://www.youtube.com/embed/';
+            var link = 'https://www.youtube.com/embed/';
             apiService
                 .getMovieTrailer(model.movieId)
                 .then(function (trailer) {
