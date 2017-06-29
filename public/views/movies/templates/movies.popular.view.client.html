@@ -1,0 +1,49 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div>
+    <div>
+        <form role="form" ng-submit="model.searchMovie(movieName)">
+            <div class="input-group search-bar">
+                <input type="text" class="form-control search-box" placeholder="Search for a movie..." autofocus="" ng-model="movieName">
+                <a class="input-group-addon search-box btn-primary btn-search" ng-click="model.searchMovie(movieName)">
+                    <i class="glyphicon glyphicon-search"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid movies-list">
+        <ul class="media-list">
+            <li class="media list-view" dir-paginate="movie in model.movies | itemsPerPage:5">
+                <div class="col-sm-2">
+                    <div class="media-left media-middle">
+                        <a ng-href="#/movies/{{movie.id}}">
+                            <img class="media-object img-responsive"
+                                 ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}"
+                                 onerror="this.src='images/image-not-available.jpg'" alt="{{movie.title}}">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-10">
+                    <div class="media-body">
+                        <h2 class="media-heading">
+                            <a ng-href="#/movies/{{movie.id}}" class="movie-title">
+                                {{movie.title}}
+                            </a>
+                        </h2>
+                        <span class="rating"> Release date &nbsp;: &nbsp; {{movie.release_date | date : "yyyy MMMM, dd"}}</span>
+                        <p class="movie-overview">{{movie.overview}}</p>
+                    </div>
+                </div>
+
+            </li>
+            <dir-pagination-controls
+                    max-size="10"
+                    direction-links="true"
+                    boundary-links="true">
+            </dir-pagination-controls>
+        </ul>
+    </div>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

@@ -1,0 +1,77 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<iframe class="trailer"
+        ng-show="model.trailer"
+        ng-src="{{model.trailer}}"
+        allowfullscreen>
+</iframe>
+
+<ul class="media-list movie-details">
+    <li class="media">
+        <div class="col-sm-2">
+            <div class="media-left media-middle">
+                <img class="media-object img-responsive movie-poster"
+                     ng-src="http://image.tmdb.org/t/p/w500{{model.movie.poster_path}}"
+                     onerror="this.src='images/image-not-available.jpg'"
+                     alt="{{model.movie.original_title}}">
+            </div>
+        </div>
+        <div class="col-sm-10">
+            <div class="media-body">
+                <h2 class="media-heading">{{model.movie.title}} &nbsp;
+                    <a ng-if="model.movie.imdb_id"
+                       href="https://www.imdb.com/title/{{model.movie.imdb_id}}" target="_blank">
+                        <i class="fa fa-imdb"></i>
+                    </a>
+                </h2>
+                <h4 class="genres"><span  ng-repeat="genre in model.movie.genres">
+                            <span class="label label-default label-as-badge" >
+                                {{"#" +genre.name}}
+                            </span>&nbsp;
+                            </span>
+                </h4>
+                <span class="plot" ng-if="model.movie.overview">{{model.movie.overview}}<br><br></span>
+                <span class="release-date" ng-if="model.movie.release_date"> <span class="content">Release date &nbsp;: &nbsp;</span> {{model.movie.release_date | date : "yyyy MMMM, dd"}}<br></span>
+                <span class="movie-rating" ng-if="model.movie.vote_average"> <span class="content">Rating &nbsp;: &nbsp;</span> {{model.movie.vote_average}}<br></span>
+                <span class="runtime" ng-if="model.movie.runtime"> <span class="content">Runtime &nbsp;: &nbsp;</span> {{model.movie.runtime}} minutes<br></span>
+                <span class="director" ng-if="model.director"> <span class="content">Director &nbsp;: &nbsp;</span>{{model.director.name}}</span><br>
+                <span class="budget" ng-if="model.movie.budget"> <span class="content">Budget &nbsp;: &nbsp;</span> {{model.movie.budget | currency:"USD$ "}}<br></span>
+                <span class="revenue" ng-if="model.movie.revenue"> <span class="content">Revenue &nbsp;: &nbsp;</span> {{model.movie.revenue | currency:"USD$ "}}</span>
+            </div>
+        </div>
+
+        <div class="col-sm-12"><h2 class="cast-heading">Cast Summary</h2></div>
+        <div>
+            <ul class="media-list">
+                <div class="col-sm-6">
+                    <li class="media" ng-repeat="people in model.cast1 | limitTo : 5">
+                        <div class="col-sm-2">
+                            <img class="media-object img-responsive"
+                                 ng-src="http://image.tmdb.org/t/p/w500{{people.profile_path}}"
+                                 onerror="this.src='images/image-not-available.jpg'"
+                                 alt="{{people.name}}">
+                        </div>
+                        <div class="col-sm-10">{{people.name}}&nbsp;&nbsp;
+                            <span ng-if="people.character">as</span> &nbsp;&nbsp; <span>{{people.character}}</span>
+                        </div>
+                    </li>
+                </div>
+                <div class="col-sm-6">
+                    <li class="media" ng-repeat="people in model.cast2 | limitTo : 5">
+                        <div class="col-sm-2">
+                            <img class="media-object img-responsive"
+                                 ng-src="http://image.tmdb.org/t/p/w500{{people.profile_path}}"
+                                 onerror="this.src='images/image-not-available.jpg'"
+                                 alt="{{people.name}}">
+                        </div>
+                        <div class="col-sm-10">{{people.name}}&nbsp;&nbsp;
+                            <span ng-if="people.character">as</span> &nbsp;&nbsp;<span>{{people.character}}</span>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </li>
+</ul>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
