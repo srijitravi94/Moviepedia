@@ -1,0 +1,49 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div>
+    <div>
+        <form role="form" ng-submit="model.searchTvshow(tvshowName)">
+            <div class="input-group search-bar">
+                <input type="text" class="form-control search-box" placeholder="Search for a TV show..." autofocus="" ng-model="tvshowName">
+                <a class="input-group-addon search-box btn-primary btn-search" ng-click="model.searchTvshow(tvshowName)">
+                    <i class="glyphicon glyphicon-search"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="container-fluid series-list">
+        <ul class="media-list">
+            <li class="media list-view" dir-paginate="tvshow in model.tvshows | itemsPerPage:5">
+                <div class="col-sm-2">
+                    <div class="media-left media-middle">
+                        <a ng-href="#/tvshows/{{tvshow.id}}">
+                            <img class="media-object img-responsive"
+                                 ng-src="http://image.tmdb.org/t/p/w500{{tvshow.poster_path}}"
+                                 onerror="this.src='images/image-not-available.jpg'" alt="{{tvshow.original_name}}">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-10">
+                    <div class="media-body">
+                        <h2 class="media-heading">
+                            <a ng-href="#/tvshows/{{tvshow.id}}" class="tvshow-title">
+                                {{tvshow.original_name}}
+                            </a>
+                        </h2>
+                        <span class="rating"> First air date &nbsp;: &nbsp; {{tvshow.first_air_date | date : "yyyy MMMM, dd"}}</span>
+                        <p class="tvshow-overview">{{tvshow.overview}}</p>
+                    </div>
+                </div>
+
+            </li>
+            <dir-pagination-controls
+                    max-size="10"
+                    direction-links="true"
+                    boundary-links="true">
+            </dir-pagination-controls>
+        </ul>
+    </div>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

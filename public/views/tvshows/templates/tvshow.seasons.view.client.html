@@ -1,0 +1,30 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="series-list row-content">
+    <ul class="media-list">
+        <li class="media" dir-paginate="season in model.seasons | itemsPerPage : 10">
+            <div class="col-md-2">
+                <div class="media-left media-middle">
+                    <img class="media-object img-responsive"
+                         ng-src="http://image.tmdb.org/t/p/w500{{season.still_path}}"
+                         onerror="this.src='images/image-not-available.jpg'"
+                         alt="{{season.name}}">
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="media-body">
+                    <h3 ng-if="season.name" class="media-heading">{{season.name}}&nbsp;<span class="season-episode" ng-if="season.season_number">(Season &nbsp;: &nbsp;{{season.season_number}} &nbsp;,&nbsp; Episode &nbsp;: &nbsp;{{season.episode_number}})</span></h3>
+                    <span ng-if="season.air_date" class="rating"> Air date &nbsp;: &nbsp; {{season.air_date | date : "yyyy MMMM,dd"}}</span><br>
+                    <p>{{season.overview}}<br><br><br></p>
+                </div>
+            </div>
+        </li>
+        <dir-pagination-controls
+                max-size="10"
+                direction-links="true"
+                boundary-links="true">
+        </dir-pagination-controls>
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

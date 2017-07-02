@@ -36,5 +36,61 @@
                 controllerAs : 'model'
             })
 
+            //route for popular tvshows page
+            .when('/tvshows', {
+                templateUrl : 'views/tvshows/templates/tvshows.popular.view.client.html',
+                controller : 'popularTvshowsController',
+                controllerAs : 'model'
+            })
+
+            //route for tvshows search page
+            .when('/tvshows/search/:tvshowName', {
+                templateUrl : 'views/tvshows/templates/tvshows.search.view.client.html',
+                controller : 'tvshowSearchController',
+                controllerAs : 'model'
+            })
+
+            //route for tvshow details page
+            .when('/tvshows/:tvshowId', {
+                templateUrl : 'views/tvshows/templates/tvshow.details.view.client.html',
+                controller : 'tvshowDetailsController',
+                controllerAs : 'model'
+            })
+
+            //route for tvshow details page
+            .when('/tvshows/:tvshowId/season/:seasonNumber', {
+                templateUrl : 'views/tvshows/templates/tvshow.seasons.view.client.html',
+                controller : 'tvshowSeasonsController',
+                controllerAs : 'model'
+            })
+
+            //route for popular people page
+            .when('/people', {
+                templateUrl : 'views/people/templates/people.popular.view.client.html',
+                controller : 'popularPeopleController',
+                controllerAs : 'model'
+            })
+
+            //route for people search page
+            .when('/people/search/:peopleName', {
+                templateUrl : 'views/people/templates/people.search.view.client.html',
+                controller : 'peopleSearchController',
+                controllerAs : 'model'
+            })
+
+            //route for login page
+            .when('/login', {
+                templateUrl : 'views/user/templates/login.view.client.html',
+                controller : 'loginController',
+                controllerAs : 'model'
+            })
+
+            //route for register page
+            .when('/register', {
+                templateUrl : 'views/user/templates/register.view.client.html',
+                controller : 'registerController',
+                controllerAs : 'model'
+            })
+
     }
 })();

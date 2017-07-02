@@ -37,14 +37,14 @@
                     var movieCrew = credits.crew;
                     var movieCast = credits.cast;
 
-                    var cast1 = [];
-                    var cast2 = [];
                     for (var i = 0; i < movieCrew.length; i++) {
                         if (movieCrew[i].job == "Director") {
                             model.director = movieCrew[i];
                         }
                     }
 
+                    var cast1 = [];
+                    var cast2 = [];
                     for(var i = 0; i< movieCast.length; i++) {
                         if(i%2 == 0) {
                             cast1.push(movieCast[i]);

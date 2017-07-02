@@ -7,42 +7,51 @@
         allowfullscreen>
 </iframe>
 
-<ul class="media-list movie-details">
+<ul class="media-list tvshow-details">
     <li class="media">
         <div class="col-sm-2">
             <div class="media-left media-middle">
                 <img class="media-object img-responsive"
-                     ng-src="http://image.tmdb.org/t/p/w500{{model.movie.poster_path}}"
+                     ng-src="http://image.tmdb.org/t/p/w500{{model.tvshow.poster_path}}"
                      onerror="this.src='images/image-not-available.jpg'"
-                     alt="{{model.movie.original_title}}">
+                     alt="{{model.tvshow.original_name}}">
             </div>
         </div>
+
         <div class="col-sm-10">
             <div class="media-body">
-                <h2 class="media-heading">{{model.movie.title}} &nbsp;
-                    <a ng-if="model.movie.imdb_id"
-                       href="https://www.imdb.com/title/{{model.movie.imdb_id}}" target="_blank">
+                <h2 class="media-heading">{{model.tvshow.original_name}}&nbsp;
+                    <a ng-if="model.imdbId"
+                       href="https://www.imdb.com/title/{{model.imdbId}}" target="_blank">
                         <i class="fa fa-imdb"></i>
                     </a>
                 </h2>
                 <h4 class="genres">
-                    <span  ng-repeat="genre in model.movie.genres">
+                    <span  ng-repeat="genre in model.tvshow.genres">
                         <span class="label label-default label-as-badge" >
                             {{"#" +genre.name}}
                         </span>&nbsp;
                     </span>
                 </h4>
-                <span class="plot" ng-if="model.movie.overview">{{model.movie.overview}}<br><br></span>
-                <span class="release-date" ng-if="model.movie.release_date"> <span class="content">Release date &nbsp;: &nbsp;</span> {{model.movie.release_date | date : "yyyy MMMM, dd"}}<br></span>
-                <span class="movie-rating" ng-if="model.movie.vote_average"> <span class="content">Rating &nbsp;: &nbsp;</span> {{model.movie.vote_average}}<br></span>
-                <span class="runtime" ng-if="model.movie.runtime"> <span class="content">Runtime &nbsp;: &nbsp;</span> {{model.movie.runtime}} minutes<br></span>
-                <span class="director" ng-if="model.director"> <span class="content">Director &nbsp;: &nbsp;</span>{{model.director.name}}</span><br>
-                <span class="budget" ng-if="model.movie.budget"> <span class="content">Budget &nbsp;: &nbsp;</span> {{model.movie.budget | currency:"USD$ "}}<br></span>
-                <span class="revenue" ng-if="model.movie.revenue"> <span class="content">Revenue &nbsp;: &nbsp;</span> {{model.movie.revenue | currency:"USD$ "}}</span>
+                <span class="plot" ng-if="model.tvshow.overview">{{model.tvshow.overview}}<br><br></span>
+                <span class="first-air-date" ng-if="model.tvshow.first_air_date"> <span class="content">First air date &nbsp;: &nbsp;</span> {{model.tvshow.first_air_date | date : "yyyy MMMM, dd"}}<br></span>
+                <span class="runtime" ng-if="model.tvshow.episode_run_time"> <span class="content">Average runtime &nbsp;: &nbsp;</span> {{model.tvshow.episode_run_time[0]}} minutes<br></span>
+                <span class="tv-rating" ng-if="model.tvshow.vote_average"> <span class="content">Rating &nbsp;: &nbsp;</span> {{model.tvshow.vote_average}}<br></span></div>
+                <span class="creators" ng-if="model.tvshow.created_by"> <span class="content">Created by &nbsp;: &nbsp;</span>{{model.tvshow.created_by[0].name}}<span ng-if="model.tvshow.created_by[1].name">&nbsp;and&nbsp;</span>{{model.tvshow.created_by[1].name}}<br></span>
+                <span class="seasons" ng-if="model.tvshow.number_of_seasons">
+                    <span class="content">
+                        Seasons &nbsp;: &nbsp;
+                    </span>
+                    <span ng-repeat="season in model.seasons">
+                        <a class="season-list" ng-href="#/tvshows/{{model.tvshow.id}}/season/{{season}}">
+                            {{season}}
+                        </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                </span>
             </div>
         </div>
 
-        <div class="col-sm-12"><h2 class="cast-heading">Cast Summary</h2></div>
+        <div class="col-sm-12"><h2 class="cast-heading" ng-if="model.cast1.length > 0">Cast Summary</h2></div>
         <div>
             <ul class="media-list">
                 <div class="col-sm-6">
@@ -73,6 +82,7 @@
                 </div>
             </ul>
         </div>
+
     </li>
 </ul>
 
