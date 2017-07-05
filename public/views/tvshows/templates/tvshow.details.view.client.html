@@ -37,7 +37,7 @@
                 <span class="first-air-date" ng-if="model.tvshow.first_air_date"> <span class="content">First air date &nbsp;: &nbsp;</span> {{model.tvshow.first_air_date | date : "yyyy MMMM, dd"}}<br></span>
                 <span class="runtime" ng-if="model.tvshow.episode_run_time"> <span class="content">Average runtime &nbsp;: &nbsp;</span> {{model.tvshow.episode_run_time[0]}} minutes<br></span>
                 <span class="tv-rating" ng-if="model.tvshow.vote_average"> <span class="content">Rating &nbsp;: &nbsp;</span> {{model.tvshow.vote_average}}<br></span></div>
-                <span class="creators" ng-if="model.tvshow.created_by"> <span class="content">Created by &nbsp;: &nbsp;</span>{{model.tvshow.created_by[0].name}}<span ng-if="model.tvshow.created_by[1].name">&nbsp;and&nbsp;</span>{{model.tvshow.created_by[1].name}}<br></span>
+                <span class="creators" ng-if="model.tvshow.created_by[0]"> <span class="content">Created by &nbsp;: &nbsp;</span>{{model.tvshow.created_by[0].name}}<span ng-if="model.tvshow.created_by[1].name">&nbsp;and&nbsp;</span>{{model.tvshow.created_by[1].name}}<br></span>
                 <span class="seasons" ng-if="model.tvshow.number_of_seasons">
                     <span class="content">
                         Seasons &nbsp;: &nbsp;
@@ -57,12 +57,14 @@
                 <div class="col-sm-6">
                     <li class="media" ng-repeat="people in model.cast1 | limitTo : 5">
                         <div class="col-sm-2">
-                            <img class="media-object img-responsive"
-                                 ng-src="http://image.tmdb.org/t/p/w500{{people.profile_path}}"
-                                 onerror="this.src='images/image-not-available.jpg'"
-                                 alt="{{people.name}}">
+                            <a ng-href="#/people/{{people.id}}">
+                                <img class="media-object img-responsive"
+                                     ng-src="http://image.tmdb.org/t/p/w500{{people.profile_path}}"
+                                     onerror="this.src='images/image-not-available.jpg'"
+                                     alt="{{people.name}}">
+                            </a>
                         </div>
-                        <div class="col-sm-10">{{people.name}}&nbsp;&nbsp;
+                        <div class="col-sm-10"><a ng-href="#/people/{{people.id}}">{{people.name}}</a>&nbsp;&nbsp;
                             <span ng-if="people.character">as</span> &nbsp;&nbsp; <span>{{people.character}}</span>
                         </div>
                     </li>
@@ -70,12 +72,14 @@
                 <div class="col-sm-6">
                     <li class="media" ng-repeat="people in model.cast2 | limitTo : 5">
                         <div class="col-sm-2">
-                            <img class="media-object img-responsive"
-                                 ng-src="http://image.tmdb.org/t/p/w500{{people.profile_path}}"
-                                 onerror="this.src='images/image-not-available.jpg'"
-                                 alt="{{people.name}}">
+                            <a ng-href="#/people/{{people.id}}">
+                                <img class="media-object img-responsive"
+                                     ng-src="http://image.tmdb.org/t/p/w500{{people.profile_path}}"
+                                     onerror="this.src='images/image-not-available.jpg'"
+                                     alt="{{people.name}}">
+                            </a>
                         </div>
-                        <div class="col-sm-10">{{people.name}}&nbsp;&nbsp;
+                        <div class="col-sm-10"><a ng-href="#/people/{{people.id}}">{{people.name}}</a>&nbsp;&nbsp;
                             <span ng-if="people.character">as</span> &nbsp;&nbsp;<span>{{people.character}}</span>
                         </div>
                     </li>

@@ -16,7 +16,7 @@
             <li class="media list-view" dir-paginate="people in model.people | itemsPerPage:5">
                 <div class="col-sm-2">
                     <div class="media-left media-middle">
-                        <a>
+                        <a ng-href="#/people/{{people.id}}">
                             <img class="media-object img-responsive"
                                  ng-src="http://image.tmdb.org/t/p/w500{{people.profile_path}}"
                                  onerror="this.src='images/image-not-available.jpg'"
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-sm-10">
                     <div class="media-body">
-                        <h2 class="media-heading"><a class="people-name">{{people.name}}</a></h2>
+                        <h2 class="media-heading"><a ng-href="#/people/{{people.id}}" class="people-name">{{people.name}}</a></h2>
                     </div>
                 </div>
             </li>

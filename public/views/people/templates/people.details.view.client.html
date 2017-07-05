@@ -1,0 +1,67 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+
+<div class="people-list row-content">
+    <ul class="media-list">
+        <li class="media">
+            <div class="col-sm-3">
+                <div class="media-left media-middle">
+                    <img class="media-object img-responsive people-profile"
+                         ng-src="http://image.tmdb.org/t/p/w500{{model.peopleDetails.profile_path}}"
+                         onerror="this.src='images/image-not-available.jpg'"
+                         alt="{{model.peopleDetails.name}}">
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="media-body">
+                    <h2 class="media-heading">{{model.peopleDetails.name}}&nbsp;
+                        <a ng-if="model.peopleIds.facebook_id"
+                           href="https://www.facebook.com/{{model.peopleIds.facebook_id}}" target="_blank">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                        <a ng-if="model.peopleIds.twitter_id"
+                           href="https://www.twitter.com/{{model.peopleIds.twitter_id}}" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a ng-if="model.peopleIds.instagram_id"
+                           href="https://www.instagram.com/{{model.peopleIds.instagram_id}}" target="_blank">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                        <a ng-if="model.peopleIds.imdb_id"
+                           href="https://www.imdb.com/name/{{model.peopleIds.imdb_id}}" target="_blank">
+                            <i class="fa fa-imdb"></i>
+                        </a>
+                    </h2>
+                    <span ng-if="model.peopleDetails.biography" class="biography">{{model.peopleDetails.biography}}<br><br></span>
+                    <span ng-if="model.peopleDetails.place_of_birth" class="birth-place"> <span class="content">Place of birth &nbsp;: &nbsp;</span> {{model.peopleDetails.place_of_birth}}<br></span>
+                    <span ng-if="model.peopleDetails.birthday" class="birthday"><span class="content">Born &nbsp;: &nbsp;</span> {{model.peopleDetails.birthday | date : "yyyy MMMM, dd"}}<br></span>
+                </div>
+            </div>
+            <div class="col-sm-12" ng-if="model.peopleMovieCredits.length>0 || model.peopleTvCredits.length>0"><h2 class="similar-movies">Known for</h2></div>
+            <div ng-if="movie.poster_path" ng-repeat="movie in model.peopleMovieCredits | limitTo:4">
+                <div class="col-sm-2">
+                    <a ng-href="#/movies/{{movie.id}}">
+                        <img class="media-object img-responsive"
+                             ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}"
+                             width=200 height="100" alt="{{movie.title}}">
+                    </a>
+                    <div class="similar-movie-title">
+                        <a class="movie-name-link" ng-href="#/movies/{{movie.id}}">{{movie.title}}</a>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="tv.poster_path" ng-repeat="tv in model.peopleTvCredits | limitTo:2">
+                <div class="col-sm-2">
+                    <a ng-href="#/tvshows/{{tv.id}}">
+                        <img class="media-object img-responsive"
+                             ng-src="http://image.tmdb.org/t/p/w500{{tv.poster_path}}" width=200 height="100" alt="{{tv.name}}"></a>
+                    <div class="similar-movie-title">
+                        <a class="movie-name-link" ng-href="#/tvshows/{{tv.id}}">{{tv.name}}</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

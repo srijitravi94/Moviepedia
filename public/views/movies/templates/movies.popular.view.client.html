@@ -31,8 +31,8 @@
                                 {{movie.title}}
                             </a>
                         </h2>
-                        <span class="rating"> Release date &nbsp;: &nbsp; {{movie.release_date | date : "yyyy MMMM, dd"}}</span>
-                        <p class="movie-overview">{{movie.overview}}</p>
+                        <span class="rating" ng-if="movie.release_date"> Release date &nbsp;: &nbsp; {{movie.release_date | date : "yyyy MMMM, dd"}}</span>
+                        <p class="movie-overview" ng-if="movie.overview">{{movie.overview}}</p>
                     </div>
                 </div>
 

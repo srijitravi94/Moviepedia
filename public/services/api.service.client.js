@@ -19,7 +19,11 @@
             "searchTvshowByTvshowName" : searchTvshowByTvshowName,
             "getSeasonDetails"         : getSeasonDetails,
             "getPopularPeople"         : getPopularPeople,
-            "searchPeopleByPeopleName" : searchPeopleByPeopleName
+            "searchPeopleByPeopleName" : searchPeopleByPeopleName,
+            "getPeopleDetails"         : getPeopleDetails,
+            "getPeopleExternalIds"     : getPeopleExternalIds,
+            "getPeopleMovieCredits"    : getPeopleMovieCredits,
+            "getPeopleTvCredits"       : getPeopleTvCredits
         };
 
         var baseUrl = "https://api.themoviedb.org/3/";
@@ -30,7 +34,7 @@
 
         function getPopularMovies() {
             var movies = [];
-            for(var i=1;i<=50;i++){
+            for(var i=1;i<=25;i++){
                 var url = baseUrl + "movie/popular" + apikey + "&page=" + i;
                 $http.get(url)
                     .then(function (response) {
@@ -76,7 +80,7 @@
         
         function getPopularTvshows() {
             var tvshows = [];
-            for(var i=1;i<=50;i++){
+            for(var i=1;i<=25;i++){
                 var url = baseUrl + "tv/popular" + apikey + "&page=" + i;
                 $http.get(url)
                     .then(function (response) {
@@ -138,7 +142,7 @@
         
         function getPopularPeople() {
             var people = [];
-            for(var i=1;i<=50;i++){
+            for(var i=1;i<=25;i++){
                 var url = baseUrl + "person/popular" + apikey + "&page=" + i;
                 $http.get(url)
                     .then(function (response) {
@@ -152,6 +156,38 @@
 
         function searchPeopleByPeopleName(peopleName) {
             var url = baseUrl + "search/person" + apikey + "&query=" + peopleName;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function getPeopleDetails(peopleId) {
+            var url = baseUrl + "person/" + peopleId + apikey;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function getPeopleExternalIds(peopleId) {
+            var url = baseUrl + "person/" + peopleId + "/external_ids"  + apikey;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function getPeopleMovieCredits(peopleId) {
+            var url = baseUrl + "person/" + peopleId + "/movie_credits"  + apikey;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function getPeopleTvCredits(peopleId) {
+            var url = baseUrl + "person/" + peopleId + "/tv_credits"  + apikey;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

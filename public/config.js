@@ -78,6 +78,13 @@
                 controllerAs : 'model'
             })
 
+            //route for people details page
+            .when('/people/:peopleId', {
+                templateUrl : 'views/people/templates/people.details.view.client.html',
+                controller : 'peopleDetailsController',
+                controllerAs : 'model'
+            })
+
             //route for login page
             .when('/login', {
                 templateUrl : 'views/user/templates/login.view.client.html',
