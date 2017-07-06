@@ -112,10 +112,11 @@ a.people-name:hover {
     font-style: italic;
 }
 
-.register, .login {
+.register, .login, .profile {
     margin-left: 25%;
     margin-right: 25%;
-    margin-top: 150px;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .text-right a,

@@ -1,0 +1,102 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="profile">
+    <form>
+
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-option-horizontal"></i>
+                    </span>
+                <input type="text"
+                       id="first-name"
+                       class="form-control"
+                       placeholder="First Name"
+                       ng-model="model.user.firstName">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-option-horizontal"></i>
+                    </span>
+                <input type="text"
+                       id="last-name"
+                       class="form-control"
+                       placeholder="Last Name"
+                       ng-model="model.user.lastName">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                <input type="text"
+                       id="username"
+                       class="form-control"
+                       placeholder="Username"
+                       ng-model="model.user.username"
+                       disabled>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                <input type="password"
+                       id="password"
+                       class="form-control"
+                       placeholder="Password"
+                       ng-model="model.user.password"
+                       disabled>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </span>
+                <input type="text"
+                       id="email"
+                       class="form-control"
+                       placeholder="Email address"
+                       ng-model="model.user.email">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-earphone"></i>
+                    </span>
+                <input type="tel"
+                       id="phone"
+                       class="form-control"
+                       placeholder="Phone number"
+                       ng-model="model.user.phone">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <a ng-click="model.logout()"
+               class="btn btn-block btn-danger">
+                Logout
+            </a>
+        </div>
+
+    </form>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

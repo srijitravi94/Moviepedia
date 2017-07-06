@@ -99,5 +99,49 @@
                 controllerAs : 'model'
             })
 
+            //route for profile page
+            .when('/profile/:userId', {
+                templateUrl : 'views/user/templates/profile/profile.view.client.html',
+                controller : 'profileController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
+            });
     }
+
+    function checkLoggedIn(userService, $q, $location) {
+        var deferred = $q.defer();
+
+        userService
+            .loggedin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/login');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function isLoggedIn(userService, $q) {
+        var deferred = $q.defer();
+
+        userService
+            .loggedin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.resolve({});
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
 })();
