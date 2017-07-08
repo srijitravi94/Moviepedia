@@ -45,7 +45,7 @@
                              ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}"
                              width=200 height="100" alt="{{movie.title}}">
                     </a>
-                    <div class="similar-movie-title text-center">
+                    <div class="similar-movie-title">
                         <a class="movie-name-link" ng-href="#/movies/{{movie.id}}">{{movie.title}}</a>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <a ng-href="#/tvshows/{{tv.id}}">
                         <img class="media-object img-responsive"
                              ng-src="http://image.tmdb.org/t/p/w500{{tv.poster_path}}" width=200 height="100" alt="{{tv.name}}"></a>
-                    <div class="similar-movie-title text-center">
+                    <div class="similar-movie-title">
                         <a class="movie-name-link" ng-href="#/tvshows/{{tv.id}}">{{tv.name}}</a>
                     </div>
                 </div>
