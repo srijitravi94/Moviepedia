@@ -19,84 +19,120 @@
             .when('/movies', {
                 templateUrl : 'views/movies/templates/movies.popular.view.client.html',
                 controller : 'popularMoviesController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for movie search page
             .when('/movies/search/:movieName', {
                 templateUrl : 'views/movies/templates/movies.search.view.client.html',
                 controller : 'movieSearchController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for movie details page
             .when('/movies/:movieId', {
                 templateUrl : 'views/movies/templates/movie.details.view.client.html',
                 controller : 'movieDetailsController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for popular tvshows page
             .when('/tvshows', {
                 templateUrl : 'views/tvshows/templates/tvshows.popular.view.client.html',
                 controller : 'popularTvshowsController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for tvshows search page
             .when('/tvshows/search/:tvshowName', {
                 templateUrl : 'views/tvshows/templates/tvshows.search.view.client.html',
                 controller : 'tvshowSearchController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for tvshow details page
             .when('/tvshows/:tvshowId', {
                 templateUrl : 'views/tvshows/templates/tvshow.details.view.client.html',
                 controller : 'tvshowDetailsController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for tvshow details page
             .when('/tvshows/:tvshowId/season/:seasonNumber', {
                 templateUrl : 'views/tvshows/templates/tvshow.seasons.view.client.html',
                 controller : 'tvshowSeasonsController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for popular people page
             .when('/people', {
                 templateUrl : 'views/people/templates/people.popular.view.client.html',
                 controller : 'popularPeopleController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for people search page
             .when('/people/search/:peopleName', {
                 templateUrl : 'views/people/templates/people.search.view.client.html',
                 controller : 'peopleSearchController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for people details page
             .when('/people/:peopleId', {
                 templateUrl : 'views/people/templates/people.details.view.client.html',
                 controller : 'peopleDetailsController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for login page
             .when('/login', {
                 templateUrl : 'views/user/templates/login.view.client.html',
                 controller : 'loginController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for register page
             .when('/register', {
                 templateUrl : 'views/user/templates/register.view.client.html',
                 controller : 'registerController',
-                controllerAs : 'model'
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for profile page
@@ -119,7 +155,7 @@
             .then(function (user) {
                 if(user === '0') {
                     deferred.reject();
-                    $location.url('/login');
+                    $location.url('/');
                 } else {
                     deferred.resolve(user);
                 }

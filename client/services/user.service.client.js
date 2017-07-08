@@ -10,9 +10,17 @@
             "register"              : register,
             "findUserById"          : findUserById,
             "findUserByCredentials" : findUserByCredentials,
+            "updateUser"            : updateUser,
+            "deleteUser"            : deleteUser,
             "login"                 : login,
             "loggedin"              : loggedin,
-            "logout"                : logout
+            "logout"                : logout,
+            "favoriteMovie"         : favoriteMovie,
+            "unFavoriteMovie"       : unFavoriteMovie,
+            "isMovieFavorited"      : isMovieFavorited,
+            "watchlistMovie"        : watchlistMovie,
+            "undoWatchlistMovie"    : undoWatchlistMovie,
+            "isMovieWatchlisted"    : isMovieWatchlisted
         };
 
         return api;
@@ -49,6 +57,22 @@
                 });
         }
 
+        function updateUser(user, userId) {
+            var url = "/api/moviepedia/user/" +userId;
+            return $http.put(url, user)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function deleteUser(userId) {
+            var url = "/api/moviepedia/user/" +userId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
         function login(username, password) {
             var url = "/api/moviepedia/login";
             var credentials = {
@@ -76,5 +100,54 @@
                     return response.data;
                 });
         }
+        
+        function favoriteMovie(movieId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/movie/favorite/" +movieId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function unFavoriteMovie(movieId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/movie/unFavorite/" +movieId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function isMovieFavorited(movieId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/movie/favorite/" +movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function watchlistMovie(movieId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/movie/watchlist/" +movieId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function undoWatchlistMovie(movieId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/movie/undoWatchlist/" +movieId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function isMovieWatchlisted(movieId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/movie/watchlist/" +movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
     }
 })();

@@ -3,8 +3,9 @@
         .module("moviepedia")
         .controller("tvshowSearchController", tvshowSearchController);
 
-    function tvshowSearchController(apiService, $routeParams, $location) {
+    function tvshowSearchController(apiService, $routeParams, $location, isLoggedIn) {
         var model = this;
+        model.isLoggedIn = isLoggedIn;
         model.tvshowName = $routeParams.tvshowName;
         model.searchTvshow = searchTvshow;
 

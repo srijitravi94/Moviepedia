@@ -3,8 +3,9 @@
         .module("moviepedia")
         .controller("loginController", loginController);
 
-    function loginController(userService, $location) {
+    function loginController(userService, $location, isLoggedIn) {
         var model = this;
+        model.isLoggedIn = isLoggedIn;
         model.login = login;
 
         function login(username, password) {

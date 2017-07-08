@@ -7,6 +7,14 @@ var userSchema = mongoose.Schema({
     password  : String,
     email     : String,
     phone     : Number,
+    favorites : {
+        movies : [String],
+        tvshows : [String]
+    },
+    watchlist : {
+        movies : [String],
+        tvshows : [String]
+    },
     dateCreated : {type : Date, default: Date.now}
 }, {collection : "users"});
 

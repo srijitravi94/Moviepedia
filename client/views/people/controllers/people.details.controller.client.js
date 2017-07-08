@@ -3,8 +3,9 @@
         .module("moviepedia")
         .controller("peopleDetailsController", peopleDetailsController);
 
-    function peopleDetailsController($routeParams, apiService) {
+    function peopleDetailsController($routeParams, apiService, isLoggedIn) {
         var model = this;
+        model.isLoggedIn = isLoggedIn;
         model.peopleId = $routeParams.peopleId;
 
         function init() {

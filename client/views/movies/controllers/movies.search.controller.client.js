@@ -3,9 +3,10 @@
         .module("moviepedia")
         .controller("movieSearchController", movieSearchController);
 
-    function movieSearchController($routeParams, apiService, $location) {
+    function movieSearchController($routeParams, apiService, $location, isLoggedIn) {
         var model = this;
         model.movieName = $routeParams.movieName;
+        model.isLoggedIn = isLoggedIn;
         model.searchMovie = searchMovie;
 
         function init() {

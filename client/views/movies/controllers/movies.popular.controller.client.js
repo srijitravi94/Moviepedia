@@ -3,9 +3,10 @@
         .module("moviepedia")
         .controller("popularMoviesController", popularMoviesController);
 
-    function popularMoviesController(apiService, $location) {
+    function popularMoviesController(apiService, $location, isLoggedIn) {
         var model = this;
         model.searchMovie = searchMovie;
+        model.isLoggedIn = isLoggedIn;
 
         function init() {
             getPopularMovies();

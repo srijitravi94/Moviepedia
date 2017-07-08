@@ -3,14 +3,21 @@
         .module("moviepedia")
         .controller("movieDetailsController", movieDetailsController);
 
-    function movieDetailsController($routeParams, apiService, $sce) {
+    function movieDetailsController($routeParams, userService, apiService, $sce, isLoggedIn) {
         var model = this;
         model.movieId = $routeParams.movieId;
+        model.isLoggedIn = isLoggedIn;
+        model.favoriteMovie = favoriteMovie;
+        model.unFavoriteMovie = unFavoriteMovie;
+        model.watchlistMovie = watchlistMovie;
+        model.undoWatchlistMovie = undoWatchlistMovie;
 
         function init() {
             getMovieDetails();
             getMovieTrailer();
             getMovieCredits();
+            isMovieFavorited();
+            isMovieWatchlisted();
         } init();
 
         function getMovieDetails() {
@@ -54,6 +61,64 @@
                     }
                     model.cast1 = cast1;
                     model.cast2 = cast2;
+                });
+        }
+
+        function favoriteMovie(movieId) {
+            userService
+                .favoriteMovie(movieId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isFavorited = true;
+                });
+        }
+
+        function unFavoriteMovie(movieId) {
+            userService
+                .unFavoriteMovie(movieId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isFavorited = false;
+                });
+        }
+
+        function isMovieFavorited() {
+            userService
+                .isMovieFavorited(model.movieId, isLoggedIn._id)
+                .then(function (user) {
+                    if (user) {
+                        model.isFavorited = true;
+                    }
+                    else {
+                        model.isFavorited = false;
+                    }
+                });
+        }
+
+        function watchlistMovie(movieId) {
+            userService
+                .watchlistMovie(movieId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isWatchlisted = true;
+                });
+        }
+
+        function undoWatchlistMovie(movieId) {
+            userService
+                .undoWatchlistMovie(movieId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isWatchlisted = false;
+                });
+        }
+
+        function isMovieWatchlisted() {
+            userService
+                .isMovieWatchlisted(model.movieId, isLoggedIn._id)
+                .then(function (user) {
+                    if (user) {
+                        model.isWatchlisted = true;
+                    }
+                    else {
+                        model.isWatchlisted = false;
+                    }
                 });
         }
     }

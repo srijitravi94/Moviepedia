@@ -3,8 +3,9 @@
         .module("moviepedia")
         .controller("peopleSearchController", peopleSearchController);
 
-    function peopleSearchController($location, apiService, $routeParams) {
+    function peopleSearchController($location, apiService, $routeParams, isLoggedIn) {
         var model = this;
+        model.isLoggedIn = isLoggedIn;
         model.peopleName = $routeParams.peopleName;
         model.searchPeople = searchPeople;
 

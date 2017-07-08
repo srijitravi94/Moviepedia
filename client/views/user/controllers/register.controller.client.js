@@ -3,8 +3,9 @@
         .module("moviepedia")
         .controller("registerController", registerController);
 
-    function registerController(userService, $location) {
+    function registerController(userService, $location, isLoggedIn) {
         var model = this;
+        model.isLoggedIn = isLoggedIn;
         model.register = register;
 
         function register(firstName, lastName, username, email,  password, verifyPassword) {

@@ -3,8 +3,9 @@
         .module("moviepedia")
         .controller("tvshowDetailsController", tvshowDetailsController);
 
-    function tvshowDetailsController($routeParams, apiService, $sce) {
+    function tvshowDetailsController($routeParams, apiService, $sce, isLoggedIn) {
         var model = this;
+        model.isLoggedIn = isLoggedIn;
         model.tvshowId = $routeParams.tvshowId;
 
         function init() {

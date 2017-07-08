@@ -8,9 +8,16 @@ passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-
 app.get('/api/moviepedia/user', findUsers);
 app.get('/api/moviepedia/user/:userId', findUserById);
+app.put('/api/moviepedia/user/:userId', updateUser);
+app.delete('/api/moviepedia/user/:userId', deleteUser);
+app.put('/api/moviepedia/user/:userId/movie/favorite/:movieId', favoriteMovie);
+app.put('/api/moviepedia/user/:userId/movie/unFavorite/:movieId', unFavoriteMovie);
+app.get('/api/moviepedia/user/:userId/movie/favorite/:movieId', isMovieFavorited);
+app.put('/api/moviepedia/user/:userId/movie/watchlist/:movieId', watchlistMovie);
+app.put('/api/moviepedia/user/:userId/movie/undoWatchlist/:movieId', undoWatchlistMovie);
+app.get('/api/moviepedia/user/:userId/movie/watchlist/:movieId', isMovieWatchlisted);
 
 app.post('/api/moviepedia/login', passport.authenticate('local'), login);
 app.post('/api/moviepedia/register', register);
@@ -57,6 +64,31 @@ function findUserById(req, res) {
         .findUserById(userId)
         .then(function (user) {
             res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function updateUser(req, res) {
+    var userId = req.params.userId;
+    var user = req.body;
+
+    userModel
+        .updateUser(user, userId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function deleteUser(req, res) {
+    var userId = req.params.userId;
+
+    userModel
+        .deleteUser(userId)
+        .then(function (success) {
+            res.sendStatus(200);
         }, function (err) {
             res.sendStatus(404);
         });
@@ -127,4 +159,84 @@ function loggedin(req, res) {
     } else {
         res.send('0');
     }
+}
+
+function favoriteMovie(req, res) {
+    var userId = req.params.userId;
+    var movieId = req.params.movieId;
+
+    userModel
+        .favoriteMovie(userId, movieId)
+        .then(function (user) {
+            res.json(user);
+
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function unFavoriteMovie(req, res) {
+    var userId = req.params.userId;
+    var movieId = req.params.movieId;
+
+    userModel
+        .unFavoriteMovie(userId, movieId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function isMovieFavorited(req, res) {
+    var userId = req.params.userId;
+    var movieId = req.params.movieId;
+
+    userModel
+        .isMovieFavorited(userId, movieId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function watchlistMovie(req, res) {
+    var userId = req.params.userId;
+    var movieId = req.params.movieId;
+
+    userModel
+        .watchlistMovie(userId, movieId)
+        .then(function (user) {
+            res.json(user);
+
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function undoWatchlistMovie(req, res) {
+    var userId = req.params.userId;
+    var movieId = req.params.movieId;
+
+    userModel
+        .undoWatchlistMovie(userId, movieId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function isMovieWatchlisted(req, res) {
+    var userId = req.params.userId;
+    var movieId = req.params.movieId;
+
+    userModel
+        .isMovieWatchlisted(userId, movieId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
 }

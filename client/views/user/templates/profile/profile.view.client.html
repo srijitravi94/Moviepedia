@@ -3,6 +3,20 @@
 <div class="profile">
     <form>
 
+        <div class="alert alert-danger"
+             ng-show="model.errorMessage">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            {{model.errorMessage}}
+        </div>
+
+        <div class="alert alert-success"
+             ng-show="model.successMessage">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            {{model.successMessage}}
+        </div>
+
         <div class="form-group">
             <label for="first-name">First Name</label>
             <div class="input-group">
@@ -46,7 +60,8 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div ng-if="model.userId === model.currentUser._id"
+             class="form-group">
             <label for="password">Password</label>
             <div class="input-group">
                     <span class="input-group-addon">
@@ -89,7 +104,26 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div ng-if="model.userId === model.currentUser._id"
+             class="form-group">
+            <a class="btn btn-block btn-danger"
+               data-toggle="modal"
+               data-target="#deleteModal">
+                Delete
+            </a>
+        </div>
+
+        <div ng-if="model.userId === model.currentUser._id"
+             class="form-group">
+            <a class="btn btn-block btn-success"
+               data-toggle="modal"
+               data-target="#updateModal">
+                Update
+            </a>
+        </div>
+
+        <div ng-if="model.userId === model.currentUser._id"
+             class="form-group">
             <a ng-click="model.logout()"
                class="btn btn-block btn-danger">
                 Logout
@@ -100,3 +134,61 @@
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>
+
+<div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5><button type="button"
+                            class="close"
+                            data-dismiss="modal">
+                    &times;
+                </button>
+                </h5>
+                <h5>Are you sure wanna update your details ?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="submit"
+                        class="modal-button btn btn-default btn-success"
+                        data-dismiss="modal"
+                        ng-click="model.updateUser(model.user)">
+                    Yes
+                </button>
+                <button type="button"
+                        class="modal-button btn btn-default btn-danger"
+                        data-dismiss="modal">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5><button type="button"
+                            class="close"
+                            data-dismiss="modal">
+                    &times;
+                </button>
+                </h5>
+                <h5>Are you sure wanna delete your account ?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                        class="modal-button btn btn-default btn-success"
+                        ng-click="model.deleteUser()"
+                        data-dismiss="modal">
+                    Yes
+                </button>
+                <button type="button"
+                        class="modal-button btn btn-default btn-danger"
+                        data-dismiss="modal">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
