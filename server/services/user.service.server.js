@@ -18,6 +18,12 @@ app.get('/api/moviepedia/user/:userId/movie/favorite/:movieId', isMovieFavorited
 app.put('/api/moviepedia/user/:userId/movie/watchlist/:movieId', watchlistMovie);
 app.put('/api/moviepedia/user/:userId/movie/undoWatchlist/:movieId', undoWatchlistMovie);
 app.get('/api/moviepedia/user/:userId/movie/watchlist/:movieId', isMovieWatchlisted);
+app.put('/api/moviepedia/user/:userId/tvshow/favorite/:tvshowId', favoriteTvshow);
+app.put('/api/moviepedia/user/:userId/tvshow/unFavorite/:tvshowId', unFavoriteTvshow);
+app.get('/api/moviepedia/user/:userId/tvshow/favorite/:tvshowId', isTvshowFavorited);
+app.put('/api/moviepedia/user/:userId/tvshow/watchlist/:tvshowId', watchlistTvshow);
+app.put('/api/moviepedia/user/:userId/tvshow/undoWatchlist/:tvshowId', undoWatchlistTvshow);
+app.get('/api/moviepedia/user/:userId/tvshow/watchlist/:tvshowId', isTvshowWatchlisted);
 
 app.post('/api/moviepedia/login', passport.authenticate('local'), login);
 app.post('/api/moviepedia/register', register);
@@ -209,7 +215,6 @@ function watchlistMovie(req, res) {
         .watchlistMovie(userId, movieId)
         .then(function (user) {
             res.json(user);
-
         }, function (err) {
             res.sendStatus(404);
         });
@@ -234,6 +239,84 @@ function isMovieWatchlisted(req, res) {
 
     userModel
         .isMovieWatchlisted(userId, movieId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function favoriteTvshow(req, res) {
+    var userId = req.params.userId;
+    var tvshowId = req.params.tvshowId;
+
+    userModel
+        .favoriteTvshow(userId, tvshowId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function unFavoriteTvshow(req, res) {
+    var userId = req.params.userId;
+    var tvshowId = req.params.tvshowId;
+
+    userModel
+        .unFavoriteTvshow(userId, tvshowId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function isTvshowFavorited(req, res) {
+    var userId = req.params.userId;
+    var tvshowId = req.params.tvshowId;
+
+    userModel
+        .isTvshowFavorited(userId, tvshowId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function watchlistTvshow(req, res) {
+    var userId = req.params.userId;
+    var tvshowId = req.params.tvshowId;
+
+    userModel
+        .watchlistTvshow(userId, tvshowId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function undoWatchlistTvshow(req, res) {
+    var userId = req.params.userId;
+    var tvshowId = req.params.tvshowId;
+
+    userModel
+        .undoWatchlistTvshow(userId, tvshowId)
+        .then(function (user) {
+            res.json(user);
+        }, function (err) {
+            res.sendStatus(404);
+        });
+}
+
+function isTvshowWatchlisted(req, res) {
+    var userId = req.params.userId;
+    var tvshowId = req.params.tvshowId;
+
+    userModel
+        .isTvshowWatchlisted(userId, tvshowId)
         .then(function (user) {
             res.json(user);
         }, function (err) {

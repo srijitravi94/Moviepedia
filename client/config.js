@@ -3,7 +3,7 @@
         .module('moviepedia')
         .config(configuration);
 
-    function configuration($routeProvider,$locationProvider, $qProvider) {
+    function configuration($routeProvider, $locationProvider, $qProvider) {
 
         $qProvider.errorOnUnhandledRejections(false);
         $locationProvider.hashPrefix("");
@@ -12,7 +12,12 @@
 
             //route for landing page
             .when('/', {
-                templateUrl : 'views/main/templates/main.view.client.html'
+                templateUrl : 'views/main/templates/main.view.client.html',
+                controller : 'mainController',
+                controllerAs : 'model',
+                resolve : {
+                    isLoggedIn : isLoggedIn
+                }
             })
 
             //route for popular movies page
@@ -26,7 +31,7 @@
             })
 
             //route for movie search page
-            .when('/movies/search/:movieName', {
+            .when('/movies/search/:movieName/', {
                 templateUrl : 'views/movies/templates/movies.search.view.client.html',
                 controller : 'movieSearchController',
                 controllerAs : 'model',

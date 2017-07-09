@@ -1,7 +1,7 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
 <iframe class="trailer"
-        ng-show="model.trailer"
+        ng-if="model.trailer"
         ng-src="{{model.trailer}}"
         frameborder="0"
         allowfullscreen>
@@ -42,14 +42,14 @@
                     <a ng-show="model.isLoggedIn._id"
                        ng-click="model.watchlistMovie(model.movie.id)">
                         <i ng-if="!model.isWatchlisted"
-                           class="fa-before fa fa-youtube-play">
+                           class="fa-before fa fa-flag-o">
                         </i>
                     </a>
 
                     <a ng-show="model.isLoggedIn._id"
                        ng-click="model.undoWatchlistMovie(model.movie.id)">
                         <i ng-if="model.isWatchlisted"
-                            class="fa-after fa fa-youtube-play">
+                            class="fa-after fa fa-flag-checkered">
                         </i>
                     </a>
                 </h2>
@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="col-sm-12"><h2 class="cast-heading">Cast Summary</h2></div>
+        <div class="col-sm-12"><h2 ng-if="model.cast1.length > 0" class="cast-heading">Cast Summary</h2></div>
         <div>
             <ul class="media-list">
                 <div class="col-sm-6">

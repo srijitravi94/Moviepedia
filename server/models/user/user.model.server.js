@@ -12,8 +12,14 @@ userModel.favoriteMovie = favoriteMovie;
 userModel.unFavoriteMovie = unFavoriteMovie;
 userModel.isMovieFavorited = isMovieFavorited;
 userModel.watchlistMovie = watchlistMovie;
-userModel.undoWatchlistMovie= undoWatchlistMovie;
+userModel.undoWatchlistMovie = undoWatchlistMovie;
 userModel.isMovieWatchlisted = isMovieWatchlisted;
+userModel.favoriteTvshow = favoriteTvshow;
+userModel.unFavoriteTvshow = unFavoriteTvshow;
+userModel.isTvshowFavorited = isTvshowFavorited;
+userModel.watchlistTvshow = watchlistTvshow;
+userModel.undoWatchlistTvshow = undoWatchlistTvshow;
+userModel.isTvshowWatchlisted = isTvshowWatchlisted;
 
 module.exports = userModel;
 
@@ -79,4 +85,34 @@ function undoWatchlistMovie(userId, movieId) {
 function isMovieWatchlisted(userId, movieId) {
     return userModel
         .findOne({_id: userId, "watchlist.movies": {$in: [movieId]}});
+}
+
+function favoriteTvshow(userId, tvshowId) {
+    return userModel
+        .update({_id: userId}, {$addToSet: {"favorites.tvshows": tvshowId}});
+}
+
+function unFavoriteTvshow(userId, tvshowId) {
+    return userModel
+        .update({_id: userId}, {$pullAll: {"favorites.tvshows": [tvshowId]}});
+}
+
+function isTvshowFavorited(userId, tvshowId) {
+    return userModel
+        .findOne({_id: userId, "favorites.tvshows": {$in: [tvshowId]}});
+}
+
+function watchlistTvshow(userId, tvshowId) {
+    return userModel
+        .update({_id: userId}, {$addToSet: {"watchlist.tvshows": tvshowId}});
+}
+
+function undoWatchlistTvshow(userId, tvshowId) {
+    return userModel
+        .update({_id: userId}, {$pullAll: {"watchlist.tvshows": [tvshowId]}});
+}
+
+function isTvshowWatchlisted(userId, tvshowId) {
+    return userModel
+        .findOne({_id: userId, "watchlist.tvshows": {$in: [tvshowId]}});
 }

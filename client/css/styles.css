@@ -88,7 +88,6 @@ a.people-name:hover {
 .fa-facebook-official {
     font-size: 30px;
     color: #3b5998;
-    text-decoration: none;
 }
 
 .fa-twitter {
@@ -140,4 +139,8 @@ a.movie-name-link:hover {
 
 .fa-after {
     color: red;
+}
+
+.fa-flag-checkered {
+    color: #18bc9c;
 }

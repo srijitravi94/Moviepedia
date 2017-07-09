@@ -20,7 +20,13 @@
             "isMovieFavorited"      : isMovieFavorited,
             "watchlistMovie"        : watchlistMovie,
             "undoWatchlistMovie"    : undoWatchlistMovie,
-            "isMovieWatchlisted"    : isMovieWatchlisted
+            "isMovieWatchlisted"    : isMovieWatchlisted,
+            "favoriteTvshow"        : favoriteTvshow,
+            "unFavoriteTvshow"      : unFavoriteTvshow,
+            "isTvshowFavorited"     : isTvshowFavorited,
+            "watchlistTvshow"       : watchlistTvshow,
+            "undoWatchlistTvshow"   : undoWatchlistTvshow,
+            "isTvshowWatchlisted"   : isTvshowWatchlisted
         };
 
         return api;
@@ -143,6 +149,54 @@
 
         function isMovieWatchlisted(movieId, userId) {
             var url = "/api/moviepedia/user/" +userId+ "/movie/watchlist/" +movieId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function favoriteTvshow(tvshowId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/tvshow/favorite/" +tvshowId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function unFavoriteTvshow(tvshowId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/tvshow/unFavorite/" +tvshowId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function isTvshowFavorited(tvshowId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/tvshow/favorite/" +tvshowId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function watchlistTvshow(tvshowId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/tvshow/watchlist/" +tvshowId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function undoWatchlistTvshow(tvshowId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/tvshow/undoWatchlist/" +tvshowId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function isTvshowWatchlisted(tvshowId, userId) {
+            var url = "/api/moviepedia/user/" +userId+ "/tvshow/watchlist/" +tvshowId;
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

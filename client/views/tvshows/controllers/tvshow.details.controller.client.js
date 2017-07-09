@@ -3,10 +3,14 @@
         .module("moviepedia")
         .controller("tvshowDetailsController", tvshowDetailsController);
 
-    function tvshowDetailsController($routeParams, apiService, $sce, isLoggedIn) {
+    function tvshowDetailsController($routeParams, userService, apiService, $sce, isLoggedIn) {
         var model = this;
         model.isLoggedIn = isLoggedIn;
         model.tvshowId = $routeParams.tvshowId;
+        model.favoriteTvshow = favoriteTvshow;
+        model.unFavoriteTvshow = unFavoriteTvshow;
+        model.watchlistTvshow = watchlistTvshow;
+        model.undoWatchlistTvshow = undoWatchlistTvshow;
 
         function init() {
             getTvshowDetails();
@@ -14,6 +18,8 @@
             numberOfSeasons();
             getTvshowCredits();
             imdbId();
+            isTvshowFavorited();
+            isTvshowWatchlisted();
         } init();
 
         function getTvshowDetails() {
@@ -71,6 +77,64 @@
                     }
                     model.cast1 = cast1;
                     model.cast2 = cast2;
+                });
+        }
+
+        function favoriteTvshow(tvshowId) {
+            userService
+                .favoriteTvshow(tvshowId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isFavorited = true;
+                });
+        }
+
+        function unFavoriteTvshow(tvshowId) {
+            userService
+                .unFavoriteTvshow(tvshowId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isFavorited = false;
+                });
+        }
+
+        function isTvshowFavorited() {
+            userService
+                .isTvshowFavorited(model.tvshowId, isLoggedIn._id)
+                .then(function (user) {
+                    if (user) {
+                        model.isFavorited = true;
+                    }
+                    else {
+                        model.isFavorited = false;
+                    }
+                });
+        }
+
+        function watchlistTvshow(tvshowId) {
+            userService
+                .watchlistTvshow(tvshowId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isWatchlisted = true;
+                });
+        }
+
+        function undoWatchlistTvshow(tvshowId) {
+            userService
+                .undoWatchlistTvshow(tvshowId, isLoggedIn._id)
+                .then(function (response) {
+                    model.isWatchlisted = false;
+                });
+        }
+
+        function isTvshowWatchlisted() {
+            userService
+                .isTvshowWatchlisted(model.tvshowId, isLoggedIn._id)
+                .then(function (user) {
+                    if (user) {
+                        model.isWatchlisted = true;
+                    }
+                    else {
+                        model.isWatchlisted = false;
+                    }
                 });
         }
 

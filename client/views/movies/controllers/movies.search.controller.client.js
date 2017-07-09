@@ -12,13 +12,14 @@
         function init() {
             searchMovieByMovieName();
         }
-        init ();
+        init();
 
         function searchMovieByMovieName() {
             apiService
                 .searchMovieByMovieName(model.movieName)
                 .then(function (movies) {
-                   model.movies = movies.results;
+                    model.movies = movies.results;
+                    console.log(model.movies)
                 });
         }
 

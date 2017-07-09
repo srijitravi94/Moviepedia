@@ -25,6 +25,34 @@
                        href="https://www.imdb.com/title/{{model.imdbId}}" target="_blank">
                         <i class="fa fa-imdb"></i>
                     </a>
+
+                    <a ng-show="model.isLoggedIn._id"
+                       ng-click="model.favoriteTvshow(model.tvshow.id)">
+                        <i ng-if="!model.isFavorited"
+                           class="fa-before fa fa-heart-o">
+                        </i>
+                    </a>
+
+                    <a ng-show="model.isLoggedIn._id"
+                       ng-click="model.unFavoriteTvshow(model.tvshow.id)">
+                        <i ng-if="model.isFavorited"
+                           class="fa-after fa fa-heart">
+                        </i>
+                    </a>
+
+                    <a ng-show="model.isLoggedIn._id"
+                       ng-click="model.watchlistTvshow(model.tvshow.id)">
+                        <i ng-if="!model.isWatchlisted"
+                           class="fa-before fa fa-flag-o">
+                        </i>
+                    </a>
+
+                    <a ng-show="model.isLoggedIn._id"
+                       ng-click="model.undoWatchlistTvshow(model.tvshow.id)">
+                        <i ng-if="model.isWatchlisted"
+                           class="fa-after fa fa-flag-checkered">
+                        </i>
+                    </a>
                 </h2>
                 <h4 class="genres">
                     <span  ng-repeat="genre in model.tvshow.genres">

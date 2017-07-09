@@ -11,7 +11,7 @@
         function init() {
             getPopularMovies();
         }
-        init ();
+        init();
 
         function getPopularMovies() {
             model.movies =
