@@ -3,7 +3,7 @@
         .module("moviepedia")
         .controller("movieDetailsController", movieDetailsController);
 
-    function movieDetailsController($routeParams, userService, apiService, $sce, isLoggedIn) {
+    function movieDetailsController($routeParams, userService, apiService, movieService, $sce, isLoggedIn) {
         var model = this;
         model.movieId = $routeParams.movieId;
         model.isLoggedIn = isLoggedIn;
@@ -11,6 +11,7 @@
         model.unFavoriteMovie = unFavoriteMovie;
         model.watchlistMovie = watchlistMovie;
         model.undoWatchlistMovie = undoWatchlistMovie;
+        model.createReview = createReview;
 
         function init() {
             getMovieDetails();
@@ -18,6 +19,7 @@
             getMovieCredits();
             isMovieFavorited();
             isMovieWatchlisted();
+            findReviewsForMovies();
         } init();
 
         function getMovieDetails() {
@@ -120,6 +122,39 @@
                         model.isWatchlisted = false;
                     }
                 });
+        }
+
+        function findReviewsForMovies() {
+            movieService
+                .findReviewsForMovies(model.movieId)
+                .then(renderReviews);
+
+            function renderReviews(movieReview) {
+                var reviews= [];
+                for(r in movieReview){
+                    reviews.push(movieReview[r]);
+                }
+                model.reviews = reviews;
+            }
+        }
+
+        function createReview(summary, description) {
+
+            var review = {
+                movieId        : model.movieId,
+                movieName      : model.movie.original_title,
+                movieImage     : model.movie.poster_path,
+                userId         : model.isLoggedIn._id,
+                firstName      : model.isLoggedIn.firstName,
+                lastName       : model.isLoggedIn.lastName,
+                image          : model.isLoggedIn.image,
+                summary        : summary,
+                description    : description
+            };
+
+            movieService
+                .createReview(review, model.isLoggedIn._id)
+                .then(findReviewsForMovies);
         }
     }
 })();

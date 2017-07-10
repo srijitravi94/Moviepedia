@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var movieSchema = require('../movie/movie.schema.server');
 
 var userSchema = mongoose.Schema({
     firstName : String,
@@ -7,6 +8,7 @@ var userSchema = mongoose.Schema({
     password  : String,
     email     : String,
     phone     : Number,
+    image     : String,
     favorites : {
         movies : [String],
         tvshows : [String]
@@ -14,6 +16,9 @@ var userSchema = mongoose.Schema({
     watchlist : {
         movies : [String],
         tvshows : [String]
+    },
+    reviews : {
+        movies : [movieSchema]
     },
     dateCreated : {type : Date, default: Date.now}
 }, {collection : "users"});

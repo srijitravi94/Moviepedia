@@ -20,10 +20,15 @@ userModel.isTvshowFavorited = isTvshowFavorited;
 userModel.watchlistTvshow = watchlistTvshow;
 userModel.undoWatchlistTvshow = undoWatchlistTvshow;
 userModel.isTvshowWatchlisted = isTvshowWatchlisted;
+userModel.addReviewsForUser = addReviewsForUser;
 
 module.exports = userModel;
 
 function createUser(user) {
+
+    if(user.image === null || user.image === '' || typeof user.image === 'undefined') {
+        user.image = "https://www.drupal.org/files/issues/default-avatar.png";
+    }
     return userModel
         .create(user);
 }
@@ -115,4 +120,14 @@ function undoWatchlistTvshow(userId, tvshowId) {
 function isTvshowWatchlisted(userId, tvshowId) {
     return userModel
         .findOne({_id: userId, "watchlist.tvshows": {$in: [tvshowId]}});
+}
+
+
+function addReviewsForUser(userId, reviewId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.reviews.movies.push(reviewId);
+            return user.save();
+        });
 }

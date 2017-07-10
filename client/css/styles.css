@@ -74,7 +74,7 @@ a.people-name:hover {
 .movie-details, .tvshow-details {
     margin-top: 100px;
     margin-left: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .media-heading, .genres {
@@ -143,4 +143,21 @@ a.movie-name-link:hover {
 
 .fa-flag-checkered {
     color: #18bc9c;
+}
+
+.review {
+    margin-bottom: 150px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+}
+
+.review-heading {
+    margin-left: 10px;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.test {
+    margin-bottom: 200px;
 }
