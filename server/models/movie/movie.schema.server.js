@@ -4,6 +4,7 @@ var movieSchema = mongoose.Schema({
     movieId     : String,
     movieName   : String,
     movieImage  : String,
+    userId      : String,
     firstName   : String,
     lastName    : String,
     image       : String,

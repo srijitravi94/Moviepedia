@@ -149,6 +149,28 @@
                     currentUser : checkLoggedIn,
                     isLoggedIn : isLoggedIn
                 }
+            })
+
+            //route for user favorites page
+            .when('/profile/:userId/favorites', {
+                templateUrl : 'views/user/templates/profile/favorite.profile.view.client.html',
+                controller : 'favoriteController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for user watchlist page
+            .when('/profile/:userId/watchlist', {
+                templateUrl : 'views/user/templates/profile/watchlist.profile.view.client.html',
+                controller : 'watchlistController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
             });
     }
 

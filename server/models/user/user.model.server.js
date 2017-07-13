@@ -20,7 +20,8 @@ userModel.isTvshowFavorited = isTvshowFavorited;
 userModel.watchlistTvshow = watchlistTvshow;
 userModel.undoWatchlistTvshow = undoWatchlistTvshow;
 userModel.isTvshowWatchlisted = isTvshowWatchlisted;
-userModel.addReviewsForUser = addReviewsForUser;
+userModel.addMovieReviewsForUser = addMovieReviewsForUser;
+userModel.addTvshowReviewsForUser = addTvshowReviewsForUser;
 
 module.exports = userModel;
 
@@ -123,11 +124,20 @@ function isTvshowWatchlisted(userId, tvshowId) {
 }
 
 
-function addReviewsForUser(userId, reviewId) {
+function addMovieReviewsForUser(userId, reviewId) {
     return userModel
         .findById(userId)
         .then(function (user) {
             user.reviews.movies.push(reviewId);
+            return user.save();
+        });
+}
+
+function addTvshowReviewsForUser(userId, reviewId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.reviews.tvshows.push(reviewId);
             return user.save();
         });
 }

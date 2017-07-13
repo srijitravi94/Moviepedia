@@ -12,6 +12,7 @@
         model.watchlistMovie = watchlistMovie;
         model.undoWatchlistMovie = undoWatchlistMovie;
         model.createReview = createReview;
+        model.selectReview = selectReview;
 
         function init() {
             getMovieDetails();
@@ -155,6 +156,10 @@
             movieService
                 .createReview(review, model.isLoggedIn._id)
                 .then(findReviewsForMovies);
+        }
+
+        function selectReview(review) {
+            model.review = angular.copy(review);
         }
     }
 })();

@@ -111,10 +111,17 @@ a.people-name:hover {
     font-style: italic;
 }
 
-.register, .login, .profile {
+.register, .login {
     margin-left: 25%;
     margin-right: 25%;
     margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.profile {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 20px;
     margin-bottom: 100px;
 }
 
@@ -156,6 +163,26 @@ a.movie-name-link:hover {
 .review-heading {
     margin-left: 10px;
     font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.fa-sidebar {
+    color: #fff;
+}
+
+.favorites {
+    margin-left: 10px;
+    margin-bottom: 80px;
+}
+
+.profile-picture-small {
+    height : 50px;
+    width : 50px;
+    margin-right: 10px;
+}
+
+.review-summary,
+.review-description {
+    overflow: hidden;
 }
 
 .test {

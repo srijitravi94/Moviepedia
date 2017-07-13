@@ -1,0 +1,66 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div ng-include="'views/user/templates/profile/sidebar.profile.view.client.html'"></div>
+
+<div class="row favorites">
+    <div class="col-sm-6">
+        <div class="container-fluid">
+            <h1 class="text-center movie-title" ng-if="model.movies.length>0">Movies</h1>
+            <ul class="media-list">
+                <li class="media list-view" ng-repeat="movie in model.movies">
+                    <div class="col-sm-2">
+                        <div class="media-left media-middle">
+                            <a ng-href="#/movies/{{movie.id}}">
+                                <img class="media-object img-responsive"
+                                     ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}"
+                                     onerror="this.src='images/image-not-available.jpg'" alt="{{movie.title}}">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <div class="media-body">
+                            <h2 class="media-heading">
+                                <a ng-href="#/movies/{{movie.id}}" class="movie-title">
+                                    {{movie.title}}
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="container-fluid">
+            <h1 class="text-center tvshow-title" ng-if="model.tvshows.length>0">TV Shows</h1>
+            <ul class="media-list">
+                <li class="media list-view" ng-repeat="tvshow in model.tvshows">
+                    <div class="col-sm-2">
+                        <div class="media-left media-middle">
+                            <a ng-href="#/tvshows/{{tvshow.id}}">
+                                <img class="media-object img-responsive"
+                                     ng-src="http://image.tmdb.org/t/p/w500{{tvshow.poster_path}}"
+                                     onerror="this.src='images/image-not-available.jpg'" alt="{{tvshow.original_name}}">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <div class="media-body">
+                            <h2 class="media-heading">
+                                <a ng-href="#/tvshows/{{tvshow.id}}" class="tvshow-title">
+                                    {{tvshow.original_name}}
+                                </a>
+                            </h2>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

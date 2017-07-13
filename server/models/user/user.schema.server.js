@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var movieSchema = require('../movie/movie.schema.server');
+var tvshowSchema = require('../tvshow/tvshow.schema.server');
 
 var userSchema = mongoose.Schema({
     firstName : String,
@@ -18,7 +19,8 @@ var userSchema = mongoose.Schema({
         tvshows : [String]
     },
     reviews : {
-        movies : [movieSchema]
+        movies  : [movieSchema],
+        tvshows : [tvshowSchema]
     },
     dateCreated : {type : Date, default: Date.now}
 }, {collection : "users"});

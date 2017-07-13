@@ -13,7 +13,7 @@ function createReview(review, userId) {
         .create(review)
         .then(function (review) {
             return userModel
-                .addReviewsForUser(userId, review._id);
+                .addMovieReviewsForUser(userId, review._id);
         });
 }
 

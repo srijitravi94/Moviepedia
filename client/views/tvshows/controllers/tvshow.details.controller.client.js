@@ -3,7 +3,7 @@
         .module("moviepedia")
         .controller("tvshowDetailsController", tvshowDetailsController);
 
-    function tvshowDetailsController($routeParams, userService, apiService, $sce, isLoggedIn) {
+    function tvshowDetailsController($routeParams, userService, tvshowService, apiService, $sce, isLoggedIn) {
         var model = this;
         model.isLoggedIn = isLoggedIn;
         model.tvshowId = $routeParams.tvshowId;
@@ -11,6 +11,8 @@
         model.unFavoriteTvshow = unFavoriteTvshow;
         model.watchlistTvshow = watchlistTvshow;
         model.undoWatchlistTvshow = undoWatchlistTvshow;
+        model.createReview = createReview;
+        model.selectReview = selectReview;
 
         function init() {
             getTvshowDetails();
@@ -20,6 +22,7 @@
             imdbId();
             isTvshowFavorited();
             isTvshowWatchlisted();
+            findReviewsForTvshows();
         } init();
 
         function getTvshowDetails() {
@@ -136,6 +139,44 @@
                         model.isWatchlisted = false;
                     }
                 });
+        }
+
+        function findReviewsForTvshows() {
+            tvshowService
+                .findReviewsForTvshows(model.tvshowId)
+                .then(renderReviews);
+
+            function renderReviews(tvshowReview) {
+                var reviews= [];
+                for(r in tvshowReview){
+                    reviews.push(tvshowReview[r]);
+                }
+                model.reviews = reviews;
+            }
+        }
+
+        function createReview(summary, description) {
+
+            var review = {
+                tvshowId       : model.tvshowId,
+                tvshowName     : model.tvshow.original_name,
+                tvshowImage    : model.tvshow.poster_path,
+                userId         : model.isLoggedIn._id,
+                firstName      : model.isLoggedIn.firstName,
+                lastName       : model.isLoggedIn.lastName,
+                image          : model.isLoggedIn.image,
+                summary        : summary,
+                description    : description
+            };
+
+            tvshowService
+                .createReview(review, model.isLoggedIn._id)
+                .then(findReviewsForTvshows);
+
+        }
+
+        function selectReview(review) {
+            model.review = angular.copy(review);
         }
 
     }
