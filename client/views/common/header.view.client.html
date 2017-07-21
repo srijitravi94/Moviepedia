@@ -36,6 +36,13 @@
                     </li>
 
                     <li ng-show="model.isLoggedIn._id">
+                        <a ng-href="#/profile/{{model.isLoggedIn._id}}/admin"
+                           ng-show="model.isLoggedIn.roles.indexOf('ADMIN')>-1">
+                            ADMIN
+                        </a>
+                    </li>
+
+                    <li ng-show="model.isLoggedIn._id">
                         <a ng-href="#/profile/{{model.isLoggedIn._id}}">
                             Welcome, {{model.isLoggedIn.firstName}}
                         </a>

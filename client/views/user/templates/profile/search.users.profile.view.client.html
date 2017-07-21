@@ -1,0 +1,43 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div ng-include="'views/user/templates/profile/sidebar.profile.view.client.html'"></div>
+
+<div class="user-search-list">
+    <div>
+        <form role="form" ng-submit="model.searchUsers(name)">
+            <div class="input-group search-user">
+                <input type="text" class="form-control search-box" placeholder="Search for a user..." autofocus="" ng-model="name">
+                <a class="input-group-addon search-box btn-primary btn-search" ng-click="model.searchUsers(name)">
+                    <i class="glyphicon glyphicon-search"></i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid users users-list" ng-show="model.users.length > 0">
+    <ul class="list-group" dir-paginate="user in model.users | itemsPerPage:5">
+        <li class="list-group-item">
+                <span>
+                     <a ng-href="#/profile/{{user._id}}">
+                        <img class="follow-profile-picture" ng-src="{{user.image}}">
+                     </a>
+                </span>
+            <a ng-href="#/profile/{{user._id}}">
+                {{user.firstName}} {{user.lastName}}
+            </a>
+        </li>
+    </ul>
+    <dir-pagination-controls
+            max-size="10"
+            direction-links="true"
+            boundary-links="true">
+    </dir-pagination-controls>
+</div>
+
+<div class="alert alert-info alert-length-users"
+     ng-show="model.users.length<1">
+    No user found for {{name}}. Please try an extensive search...
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

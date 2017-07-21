@@ -1,0 +1,51 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="container-fluid admin-title" ng-if="model.critics.length>0">
+    <h1>CRITIC APPLICATION</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item list-bar-active">
+            <div class="row">
+                <div class="col-md-2 col-xs-3">
+                    Username
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Person
+                </div>
+                <div class="col-md-5 col-xs-4">
+                    Experience
+                </div>
+                <div class="col-md-2 col-xs-5">
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item" ng-repeat="critic in model.critics">
+            <div class="row">
+                <div class="col-md-2 col-xs-3">
+                    <a ng-href="#/profile/{{critic.userId}}">
+                        {{critic.username}}
+                    </a>
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    {{critic.firstName}} {{critic.lastName}}
+                </div>
+                <div class="col-md-5 col-xs-4 critic-experience">
+                    {{critic.experience}}
+                </div>
+                <div class="col-md-2 col-xs-5">
+                    <button ng-click="model.acceptApplication(critic)"
+                            class="btn btn-success pull-right">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button ng-click="model.deleteApplication(critic)"
+                            class="btn btn-danger pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

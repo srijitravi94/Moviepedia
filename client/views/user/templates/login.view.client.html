@@ -1,6 +1,6 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
-<div class="login text-center">
+<div class="login text-center" ng-hide="model.isLoggedIn._id">
     <h3>Sign in</h3>
     <form class="form-horizontal"
           id="loginForm"
@@ -41,6 +41,32 @@
                     class="btn btn-block btn-primary">
                 Login
             </button>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                <a ng-href="/auth/google"
+                   class="btn btn-danger btn-block google">
+                    <span class="fa fa-google-plus"></span>
+                    Google
+                </a>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <a ng-href="/auth/facebook"
+                   class="btn btn-primary btn-block facebook">
+                    <span class="fa fa-facebook"></span>
+                    Facebook
+                </a>
+            </div>
+
+            <div class="col-sm-4 form-group">
+                <a ng-href="/auth/twitter"
+                   class="btn btn-primary btn-block twitter">
+                    <span class="fa fa-twitter fa-tweet"></span>
+                    Twitter
+                </a>
+            </div>
         </div>
 
         <div class="row text-right">

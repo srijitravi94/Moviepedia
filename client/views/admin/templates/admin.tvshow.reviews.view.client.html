@@ -1,0 +1,55 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="container-fluid admin-title" ng-if="model.tvshowReviews.length>0">
+    <h1>TV SHOW REVIEWS</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item list-bar-active">
+            <div class="row">
+                <div class="col-md-2 col-xs-4">
+                    TV Show
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Person
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Summary
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    Description
+                </div>
+                <div class="col-md-1 col-xs-4">
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item" ng-repeat="review in model.tvshowReviews">
+            <div class="row">
+                <div class="col-md-2 col-xs-4">
+                    <a ng-href="#/tvshows/{{review.tvshowId}}">
+                        {{review.tvshowName}}
+                    </a>
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    <a ng-href="#/profile/{{review.userId}}">
+                        {{review.firstName}} {{review.lastName}}
+                    </a>
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs review-summary">
+                    {{review.summary}}
+                </div>
+                <div class="col-md-3 col-xs-4 review-description">
+                    {{review.description}}
+                </div>
+                <div class="col-md-1 col-xs-4">
+                    <button ng-click="model.deleteReview(review._id, review.userId)"
+                            class="btn btn-danger pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

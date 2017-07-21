@@ -23,6 +23,10 @@ a.navbar-brand {
     margin-bottom: 80px;
 }
 
+.users-list {
+    margin-bottom: 80px;
+}
+
 a.movie-title,
 a.movie-title:hover,
 a.tvshow-title,
@@ -152,7 +156,14 @@ a.movie-name-link:hover {
     color: #18bc9c;
 }
 
-.review {
+.review  {
+    margin-bottom: 50px;
+}
+
+
+
+.review-list-user {
+    margin-top: -50px;
     margin-bottom: 150px;
 }
 
@@ -169,7 +180,7 @@ a.movie-name-link:hover {
     color: #fff;
 }
 
-.favorites {
+.favorites, .watchlist {
     margin-left: 10px;
     margin-bottom: 80px;
 }
@@ -181,10 +192,96 @@ a.movie-name-link:hover {
 }
 
 .review-summary,
-.review-description {
+.review-description,
+.critic-experience {
     overflow: hidden;
 }
 
-.test {
-    margin-bottom: 200px;
+.upload {
+    margin-top: 20px;
+}
+
+.admin-list a {
+    color: #18bc9c;
+}
+
+.admin-title {
+    margin-top: 100px;
+}
+
+.list-bar-active {
+    background-color: #2c3e50;
+    color: white;
+}
+
+a.movie-length-null, a.tvshow-length-null {
+    color: white;
+    text-decoration: underline;
+}
+
+.follow-profile-picture {
+    height : 100px;
+    width : 100px;
+    margin-right: 10px;
+}
+
+.application {
+    margin-left: 25%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+
+@media (max-width: 767px) {
+    .application {
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+}
+
+.cancel-btn {
+    margin-right: 10px;
+}
+
+.fa-check-circle {
+    color: #18bc9c;
+    margin-left: 5px;
+}
+
+.critic-review {
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+.facebook,
+.facebook:hover,
+.facebook:active,
+.facebook:focus,
+.facebook:active:focus {
+    border-color: #3B5998;
+    background-color: #3B5998;
+}
+
+.twitter,
+.twitter:hover,
+.twitter:active,
+.twitter:focus,
+.twitter:active:focus {
+    border-color: #00aced;
+    background-color: #00aced;
+}
+
+@media (min-width: 767px) {
+    .facebook {
+        margin-left: 45px;
+    }
+
+    .twitter {
+        margin-left: 90px;
+    }
+}
+
+.fa-tweet {
+    color: white;
 }

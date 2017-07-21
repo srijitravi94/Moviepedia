@@ -1,0 +1,29 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="container-fluid admin-title">
+    <h1>ADMIN</h1>
+    <ul class="list-group">
+        <li class="list-group-item admin-list">
+            <a ng-href="#/profile/{{model.userId}}/admin/users">
+                Users
+            </a>
+        </li>
+        <li class="list-group-item admin-list">
+            <a ng-href="#/profile/{{model.userId}}/admin/movie/reviews">
+                Movie Reviews
+            </a>
+        </li>
+        <li class="list-group-item admin-list">
+            <a ng-href="#/profile/{{model.userId}}/admin/tvshow/reviews">
+                TV Show Reviews
+            </a>
+        </li>
+        <li class="list-group-item admin-list">
+            <a ng-href="#/profile/{{model.userId}}/admin/critics">
+                Critic Applications
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

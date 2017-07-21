@@ -1,0 +1,95 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div class="container-fluid admin-title">
+    <h1>USERS</h1>
+
+    <div class="alert alert-danger"
+         ng-show="model.error">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        {{model.error}}
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item list-bar-active">
+            <div class="row">
+                <div class="col-md-2 col-xs-4">
+                    Username
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    First Name
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    Last Name
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    Roles
+                </div>
+                <div class="col-md-2 col-xs-4">
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-2 col-xs-4">
+                    <input ng-model="model.user.username"
+                           class="form-control">
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    <input ng-model="model.user.firstName"
+                           class="form-control">
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    <input ng-model="model.user.lastName"
+                           class="form-control">
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    <input ng-model="model.user.roles"
+                           class="form-control">
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    <button ng-click="model.createUser(model.user); model.user={}"
+                            ng-show="!model.updateButton"
+                            class="btn btn-success pull-right">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button ng-click="model.updateUser(model.user); model.user={}"
+                            ng-show="model.updateButton"
+                            class="btn btn-success pull-right">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item" ng-repeat="user in model.users">
+            <div class="row">
+                <div class="col-md-2 col-xs-4 admin-list">
+                    <a class="username" ng-href="#/profile/{{user._id}}">{{user.username}}</a>
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    {{user.firstName}}
+                </div>
+                <div class="col-md-3 hidden-sm hidden-xs">
+                    {{user.lastName}}
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    {{user.roles}}
+                </div>
+                <div class="col-md-2 col-xs-4">
+                    <button ng-click="model.deleteUser(user)"
+                            class="btn btn-danger pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <button ng-click="model.selectUser(user); model.updateButton = true;"
+                            class="btn btn-warning pull-right">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

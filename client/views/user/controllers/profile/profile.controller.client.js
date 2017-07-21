@@ -11,10 +11,13 @@
         model.isLoggedIn = isLoggedIn;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.follow = follow;
+        model.unfollow = unfollow;
         
         
         function init() {
             findUserById();
+            isUserFollowed();
         } init();
         
         function findUserById() {
@@ -62,7 +65,38 @@
             function deleteError() {
                 model.errorMessage = "Unable to delete profile";
             }
+        }
 
+        function follow(followUserId) {
+            userService
+                .followUsers(model.currentUser._id, followUserId)
+                .then(function (user) {
+                    model.isFollow = true;
+                }, function (err) {
+                    console.log(err);
+                });
+        }
+
+        function unfollow(unfollowUserId) {
+            userService
+                .unfollowUsers(model.currentUser._id, unfollowUserId)
+                .then(function (user) {
+                    model.isFollow = false;
+                }, function (err) {
+                    console.log(err);
+                });
+        }
+
+        function isUserFollowed() {
+            userService
+                .isUserFollowed(model.currentUser._id, model.userId)
+                .then(function (user) {
+                    if(user) {
+                        model.isFollow = true;
+                    } else {
+                        model.isFollow = false;
+                    }
+                });
         }
     }
 })();

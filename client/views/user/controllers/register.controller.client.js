@@ -8,7 +8,7 @@
         model.isLoggedIn = isLoggedIn;
         model.register = register;
 
-        function register(firstName, lastName, username, email,  password, verifyPassword) {
+        function register(firstName, lastName, username,  password, verifyPassword) {
             if(firstName === null || firstName === '' || typeof firstName === 'undefined') {
                 model.error = "First Name is required";
                 return;

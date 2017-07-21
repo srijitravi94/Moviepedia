@@ -14,6 +14,7 @@
             "deleteUser"            : deleteUser,
             "login"                 : login,
             "loggedin"              : loggedin,
+            "checkAdmin"            : checkAdmin,
             "logout"                : logout,
             "favoriteMovie"         : favoriteMovie,
             "unFavoriteMovie"       : unFavoriteMovie,
@@ -26,7 +27,16 @@
             "isTvshowFavorited"     : isTvshowFavorited,
             "watchlistTvshow"       : watchlistTvshow,
             "undoWatchlistTvshow"   : undoWatchlistTvshow,
-            "isTvshowWatchlisted"   : isTvshowWatchlisted
+            "isTvshowWatchlisted"   : isTvshowWatchlisted,
+            "followUsers"           : followUsers,
+            "unfollowUsers"         : unfollowUsers,
+            "isUserFollowed"        : isUserFollowed,
+            "findUserByName"        : findUserByName,
+            "adminFindAllUsers"     : adminFindAllUsers,
+            "adminCreateUser"       : adminCreateUser,
+            "adminDeleteUser"       : adminDeleteUser,
+            "adminUpdateUser"       : adminUpdateUser,
+            "addCriticToUser"       : addCriticToUser
         };
 
         return api;
@@ -101,6 +111,14 @@
         
         function loggedin() {
             var url = "/api/moviepedia/loggedin";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkAdmin() {
+            var url = "/api/moviepedia/checkAdmin";
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -203,5 +221,77 @@
                 });
         }
 
-    }
+        function followUsers(currentUserId, followUserId) {
+            var url = "/api/moviepedia/user/" +currentUserId+ "/follow/" +followUserId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function unfollowUsers(currentUserId, unfollowUserId) {
+            var url = "/api/moviepedia/user/" +currentUserId+ "/unfollow/" +unfollowUserId;
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function isUserFollowed(currentUserId, followUserId) {
+            var url = "/api/moviepedia/user/" + currentUserId + "/follow/" + followUserId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findUserByName(name) {
+            var url = "/api/moviepedia/searchUser?name=" +name;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function adminFindAllUsers() {
+            var url = "/api/moviepedia/checkAdmin/user";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function adminCreateUser(newUser) {
+            var url = "/api/moviepedia/checkAdmin";
+            return $http.post(url, newUser)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function adminDeleteUser(userId) {
+            var url = "/api/moviepedia/checkAdmin/" +userId;
+            return $http.delete(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function adminUpdateUser(user, userId) {
+            var url = "/api/moviepedia/checkAdmin/" +userId;
+            return $http.put(url, user)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function addCriticToUser(userId) {
+            var url = "/api/moviepedia/critic/" +userId+ "/addRole";
+            return $http.put(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        }
 })();

@@ -8,6 +8,7 @@ var movieSchema = mongoose.Schema({
     firstName   : String,
     lastName    : String,
     image       : String,
+    isCritic    : Boolean,
     summary     : String,
     description : String,
     dateCreated : {type : Date, default: Date.now}

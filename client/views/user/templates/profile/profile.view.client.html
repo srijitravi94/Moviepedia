@@ -106,33 +106,56 @@
             </div>
         </div>
 
-        <div ng-if="model.userId === model.currentUser._id"
-             class="form-group">
-            <a class="btn btn-block btn-danger"
-               data-toggle="modal"
-               data-target="#deleteModal">
-                Delete
-            </a>
-        </div>
-
-        <div ng-if="model.userId === model.currentUser._id"
-             class="form-group">
-            <a class="btn btn-block btn-success"
-               data-toggle="modal"
-               data-target="#updateModal">
-                Update
-            </a>
-        </div>
-
-        <div ng-if="model.userId === model.currentUser._id"
-             class="form-group">
-            <a ng-click="model.logout()"
-               class="btn btn-block btn-danger">
-                Logout
-            </a>
-        </div>
-
     </form>
+
+    <div ng-if="model.userId === model.currentUser._id" class="form-group">
+        <div class="form-group">
+            <label for="image">Profile Picture</label>
+            <form action="/api/moviepedia/upload" role="form" method="post" enctype="multipart/form-data">
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-upload"></i>
+                        </span>
+                    <input name="myFile"
+                           type="file"
+                           id="image"
+                           class="form-control"
+                           required/>
+                    <input name="userId" value="{{model.currentUser._id}}" style="display: none"/>
+                </div>
+                <button type="submit"
+                        class="btn btn-block btn-primary upload">
+                    Upload Image
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div ng-if="model.userId === model.currentUser._id"
+         class="form-group">
+        <a class="btn btn-block btn-danger"
+           data-toggle="modal"
+           data-target="#deleteModal">
+            Delete
+        </a>
+    </div>
+
+    <div ng-if="model.userId === model.currentUser._id"
+         class="form-group">
+        <a class="btn btn-block btn-success"
+           data-toggle="modal"
+           data-target="#updateModal">
+            Update
+        </a>
+    </div>
+
+    <div ng-if="model.userId === model.currentUser._id"
+         class="form-group">
+        <a ng-click="model.logout()"
+           class="btn btn-block btn-danger">
+            Logout
+        </a>
+    </div>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

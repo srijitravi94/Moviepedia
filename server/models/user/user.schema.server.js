@@ -1,6 +1,4 @@
 var mongoose = require('mongoose');
-var movieSchema = require('../movie/movie.schema.server');
-var tvshowSchema = require('../tvshow/tvshow.schema.server');
 
 var userSchema = mongoose.Schema({
     firstName : String,
@@ -10,6 +8,26 @@ var userSchema = mongoose.Schema({
     email     : String,
     phone     : Number,
     image     : String,
+
+    roles     : [{type: String,
+                default : 'USER',
+                enum : ['USER', 'ADMIN','CRITIC']}],
+
+    google: {
+        id:    String,
+        token: String
+    },
+
+    facebook: {
+        id:    String,
+        token: String
+    },
+
+    twitter: {
+        id:    String,
+        token: String
+    },
+
     favorites : {
         movies : [String],
         tvshows : [String]
@@ -19,9 +37,11 @@ var userSchema = mongoose.Schema({
         tvshows : [String]
     },
     reviews : {
-        movies  : [movieSchema],
-        tvshows : [tvshowSchema]
+        movies  : [{type: mongoose.Schema.Types.ObjectId, ref: "movieModel"}],
+        tvshows : [{type: mongoose.Schema.Types.ObjectId, ref: "tvshowModel"}]
     },
+    followers: [String],
+    following: [String],
     dateCreated : {type : Date, default: Date.now}
 }, {collection : "users"});
 

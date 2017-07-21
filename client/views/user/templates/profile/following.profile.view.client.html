@@ -1,0 +1,33 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div ng-include="'views/user/templates/profile/sidebar.profile.view.client.html'"></div>
+
+<div class="container-fluid users">
+    <div class="alert alert-info"
+         ng-show="model.following.length<1 && model.currentUser._id == model.userId">
+        You're not following any of the users
+    </div>
+    <div class="alert alert-info"
+         ng-show="model.following.length<1 && model.currentUser._id != model.userId">
+        This user is not following any of the users
+    </div>
+    <ul class="list-group" dir-paginate="following in model.following | itemsPerPage:5">
+        <li class="list-group-item">
+                <span>
+                     <a ng-href="#/profile/{{following._id}}">
+                        <img class="follow-profile-picture" ng-src="{{following.image}}">
+                     </a>
+                </span>
+            <a ng-href="#/profile/{{following._id}}">
+                {{following.firstName}} {{following.lastName}}
+            </a>
+        </li>
+    </ul>
+    <dir-pagination-controls
+            max-size="10"
+            direction-links="true"
+            boundary-links="true">
+    </dir-pagination-controls>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

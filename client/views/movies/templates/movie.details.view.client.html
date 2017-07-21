@@ -110,44 +110,6 @@
     </li>
 </ul>
 
-<div class="container-fluid" ng-show="model.isLoggedIn._id">
-    <div class="col-xs-12 col-sm-8">
-        <h1 ng-show="model.reviews.length > 0">REVIEWS</h1>
-        <div ng-repeat="review in model.reviews">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a ng-href="#/profile/{{review.userId}}">
-                        <img class="profile-picture-small" ng-src="{{review.image}}">
-                    </a>
-                    <span class="user-list">
-                        <a ng-href="#/profile/{{review.userId}}">
-                            {{review.firstName}} {{review.lastName}}
-                        </a>&nbsp; &nbsp;
-                    </span>
-
-                    <button ng-show="model.isLoggedIn._id === review.userId"
-                            ng-click="model.deleteReview(review._id)"
-                            class="btn btn-danger pull-right">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-
-                    <button ng-show="model.isLoggedIn._id === review.userId"
-                            ng-click="model.selectReview(review)"
-                            data-toggle="modal"
-                            data-target="#updateModal"
-                            class="update-btn btn btn-warning pull-right">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                    </button>
-
-                    <h1 class="review-summary">"{{review.summary}}"</h1>
-                    <p class="review-description">{{review.description}}</p>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-</div>
-
 <div class="container-fluid review" ng-show="model.isLoggedIn._id">
     <h1 class="review-heading">Write a review</h1>
     <div class="col-xs-12 col-sm-8">
@@ -181,37 +143,119 @@
     </div>
 </div>
 
+<div class="container-fluid review-list" ng-show="model.isLoggedIn._id">
+    <div class="col-xs-12 col-sm-8">
+        <h1 class="critic-review" ng-show="model.reviews.length > 0 && model.criticReview.length>0">CRITIC REVIEWS</h1>
+        <div ng-repeat="review in model.reviews">
+            <ul class="list-group" ng-if="review.isCritic">
+                <li class="list-group-item">
+                    <a ng-href="#/profile/{{review.userId}}">
+                        <img class="profile-picture-small" ng-src="{{review.image}}">
+                    </a>
+                    <span class="user-list">
+                        <a ng-href="#/profile/{{review.userId}}">
+                            {{review.firstName}} {{review.lastName}}
+                        </a>
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp; &nbsp;
+                    </span>
+
+                    <button ng-show="model.isLoggedIn._id === review.userId"
+                            ng-click="model.deleteReview(review._id)"
+                            class="btn btn-danger pull-right">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+
+                    <button ng-show="model.isLoggedIn._id === review.userId"
+                            ng-click="model.selectReview(review)"
+                            data-toggle="modal"
+                            data-target="#updateModal"
+                            class="update-btn btn btn-warning pull-right">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+
+                    <h1 class="review-summary critic-review">"{{review.summary}}"</h1>
+                    <p class="review-description critic-review">{{review.description}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid review-list-user" ng-show="model.isLoggedIn._id">
+    <div class="col-xs-12 col-sm-8">
+        <h1 ng-show="model.reviews.length > 0 && model.userReview.length>0">USER REVIEWS</h1>
+        <div ng-repeat="review in model.reviews">
+            <ul class="list-group" ng-if="!review.isCritic">
+                <li class="list-group-item">
+                    <a ng-href="#/profile/{{review.userId}}">
+                        <img class="profile-picture-small" ng-src="{{review.image}}">
+                    </a>
+                    <span class="user-list">
+                        <a ng-href="#/profile/{{review.userId}}">
+                            {{review.firstName}} {{review.lastName}}
+                        </a>&nbsp; &nbsp;
+                    </span>
+
+                    <button ng-show="model.isLoggedIn._id === review.userId"
+                            ng-click="model.deleteReview(review._id)"
+                            class="btn btn-danger pull-right">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+
+                    <button ng-show="model.isLoggedIn._id === review.userId"
+                            ng-click="model.selectReview(review)"
+                            data-toggle="modal"
+                            data-target="#updateModal"
+                            class="update-btn btn btn-warning pull-right">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </button>
+
+                    <h1 class="review-summary">"{{review.summary}}"</h1>
+                    <p class="review-description">{{review.description}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="updateModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-body">
-                <label for="modal-summary">Summary</label>
-                <input class="form-control"
-                       ng-model="model.review.summary"
-                       placeholder="Review Summary"
-                       id="modal-summary"/><br>
+            <form role="form" name="updateReviewForm">
+                <div class="form-group">
+                    <div class="modal-body">
+                        <label for="modal-summary">Summary</label>
+                        <input class="form-control"
+                               ng-model="model.review.summary"
+                               placeholder="Review Summary"
+                               id="modal-summary"
+                               required/><br>
 
-                <label for="modal-description">Description</label>
-                <textarea id="modal-description"
-                          ng-model="model.review.description"
-                          rows="5"
-                          placeholder="Detailed description"
-                          class="form-control"></textarea>
-            </div>
+                        <label for="modal-description">Description</label>
+                        <textarea id="modal-description"
+                                  ng-model="model.review.description"
+                                  rows="5"
+                                  placeholder="Detailed description"
+                                  class="form-control"
+                                  required></textarea>
+                    </div>
 
-            <div class="modal-footer">
-                <button type="button"
-                        class="modal-button btn btn-default btn-primary"
-                        data-dismiss="modal"
-                        ng-click="model.updateReview(model.review)">
-                    Update
-                </button>
-                <button type="button"
-                        class="modal-button btn btn-default btn-primary"
-                        data-dismiss="modal">
-                    Cancel
-                </button>
-            </div>
+                    <div class="modal-footer">
+                        <button type="submit"
+                                class="modal-button btn btn-default btn-primary"
+                                data-dismiss="modal"
+                                ng-click="model.updateReview(model.review)"
+                                ng-disabled="updateReviewForm.$invalid">
+                            Update
+                        </button>
+                        <button type="button"
+                                class="modal-button btn btn-default btn-primary"
+                                data-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

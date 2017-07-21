@@ -1,0 +1,86 @@
+<div ng-include="'views/common/header.view.client.html'"></div>
+
+<div ng-include="'views/user/templates/profile/sidebar.profile.view.client.html'"></div>
+
+<div class="favorites">
+    <div class="col-sm-6">
+        <div class="container-fluid">
+            <h1 class="text-center movie-title">Movies</h1>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.userMovieReviews.length<1 && model.currentUser._id == model.userId">
+                Checkout the <a class="movie-length-null" ng-href="#/movies">MOVIES</a> and add your review
+            </div>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.userMovieReviews.length<1 && model.currentUser._id != model.userId">
+                This user hasn't reviewed any of the Movies
+            </div>
+            <ul class="media-list">
+                <li class="media list-view" ng-repeat="movie in model.userMovieReviews">
+                    <div class="col-sm-2">
+                        <div class="media-left media-middle">
+                            <a ng-href="#/movies/{{movie.movieId}}">
+                                <img class="media-object img-responsive"
+                                     ng-src="http://image.tmdb.org/t/p/w500{{movie.movieImage}}"
+                                     onerror="this.src='images/image-not-available.jpg'" alt="{{movie.movieName}}">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <div class="media-body">
+                            <h2 class="media-heading">
+                                <a ng-href="#/movies/{{movie.movieId}}" class="movie-title">
+                                    {{movie.movieName}}
+                                </a>
+                            </h2>
+                            <span><span class="content"> Summary &nbsp;&nbsp;&nbsp;</span>: &nbsp; {{movie.summary}}</span><br>
+                            <span><span class="content"> Description </span>: &nbsp; {{movie.description}}</span>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="container-fluid">
+            <h1 class="text-center tvshow-title">TV Shows</h1>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.userTvshowReviews.length<1 && model.currentUser._id == model.userId">
+                Checkout the <a class="tvshow-length-null" ng-href="#/tvshows">TV SHOWS</a> and add your review
+            </div>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.userTvshowReviews.length<1 && model.currentUser._id != model.userId">
+                This user hasn't reviewed any of the TV Shows
+            </div>
+            <ul class="media-list">
+                <li class="media list-view" ng-repeat="tvshow in model.userTvshowReviews">
+                    <div class="col-sm-2">
+                        <div class="media-left media-middle">
+                            <a ng-href="#/tvshows/{{tvshow.tvshowId}}">
+                                <img class="media-object img-responsive"
+                                     ng-src="http://image.tmdb.org/t/p/w500{{tvshow.tvshowImage}}"
+                                     onerror="this.src='images/image-not-available.jpg'" alt="{{tvshow.tvshowName}}">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-10">
+                        <div class="media-body">
+                            <h2 class="media-heading">
+                                <a ng-href="#/tvshows/{{tvshow.tvshowId}}" class="tvshow-title">
+                                    {{tvshow.tvshowName}}
+                                </a>
+                            </h2>
+                            <span><span class="content"> Summary &nbsp;&nbsp;&nbsp;</span>: &nbsp; {{tvshow.summary}}</span><br>
+                            <span><span class="content"> Description </span>: &nbsp; {{tvshow.description}}</span>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

@@ -1,6 +1,6 @@
 <div ng-include="'views/common/header.view.client.html'"></div>
 
-<div class="register text-center">
+<div class="register text-center" ng-hide="model.isLoggedIn._id">
     <h3>Register</h3>
 
     <div ng-show="model.error"

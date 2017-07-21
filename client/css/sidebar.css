@@ -107,6 +107,50 @@
 }
 
 @media(min-width:768px) {
+
+    .users {
+        margin-top: 50px;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    .user-search-list, .alert-length-users {
+        margin-top: 100px;
+        margin-left: 210px;
+        margin-right: 210px;
+        margin-bottom: 50px;
+    }
+
+    .alert-length-users {
+        margin-top: -20px;
+        margin-left: 210px;
+        margin-right: 210px;
+    }
+
+    .alert-length {
+        margin-left: 200px;
+        margin-right: 100px;
+    }
+
+    .profile-picture {
+        margin-left: 40px;
+        height: 100px;
+        margin-bottom: 10px;
+        width : 50%;
+    }
+
+    .critic {
+        margin-left: 40px;
+    }
+
+    .follow {
+        margin-left: 60px;
+    }
+
+    .unfollow {
+        margin-left: 50px;
+    }
+
     #wrapper {
         padding-left: 220px;
     }
@@ -144,6 +188,52 @@
 
 
 @media(max-width:767px) {
+
+    .users {
+        margin-top: 50px;
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+
+    .user-search-list {
+        margin-top: 100px;
+        margin-left: 60px;
+        margin-right: 60px;
+        margin-bottom: 50px;
+    }
+
+    .alert-length-users {
+        margin-top: -20px;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+
+    .alert-length {
+        margin-left: 20px;
+        margin-right: 10px;
+    }
+
+    .profile-picture {
+        margin-left: 70px;
+        height: 100px;
+        margin-bottom: 10px;
+        width : 50%;
+    }
+
+    .critic {
+        margin-left: 70px;
+        margin-bottom: 10px;
+    }
+
+    .follow {
+        margin-left: 95px;
+        margin-bottom: 20px;
+    }
+
+    .unfollow {
+        margin-left: 85px;
+        margin-bottom: 20px;
+    }
 
     #wrapper.toggled #page-content-wrapper {
         position: absolute;

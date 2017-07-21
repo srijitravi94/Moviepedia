@@ -2,10 +2,18 @@
 
 <div ng-include="'views/user/templates/profile/sidebar.profile.view.client.html'"></div>
 
-<div class="row favorites">
+<div class="favorites">
     <div class="col-sm-6">
         <div class="container-fluid">
-            <h1 class="text-center movie-title" ng-if="model.movies.length>0">Movies</h1>
+            <h1 class="text-center movie-title">Movies</h1>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.movies.length<1 && model.currentUser._id == model.userId">
+                Checkout the <a class="movie-length-null" ng-href="#/movies">MOVIES</a> and add to favorites
+            </div>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.movies.length<1 && model.currentUser._id != model.userId">
+                This user hasn't favorited any of the Movies
+            </div>
             <ul class="media-list">
                 <li class="media list-view" ng-repeat="movie in model.movies">
                     <div class="col-sm-2">
@@ -34,7 +42,15 @@
     </div>
     <div class="col-sm-6">
         <div class="container-fluid">
-            <h1 class="text-center tvshow-title" ng-if="model.tvshows.length>0">TV Shows</h1>
+            <h1 class="text-center tvshow-title">TV Shows</h1>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.tvshows.length<1 && model.currentUser._id == model.userId">
+                Checkout the <a class="tvshow-length-null" ng-href="#/tvshows">TV SHOWS</a> and add to favorites
+            </div>
+            <div class="alert alert-info alert-length"
+                 ng-show="model.tvshows.length<1 && model.currentUser._id != model.userId">
+                This user hasn't favorited any of the TV Shows
+            </div>
             <ul class="media-list">
                 <li class="media list-view" ng-repeat="tvshow in model.tvshows">
                     <div class="col-sm-2">

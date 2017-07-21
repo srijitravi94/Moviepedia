@@ -13,6 +13,8 @@
         model.undoWatchlistTvshow = undoWatchlistTvshow;
         model.createReview = createReview;
         model.selectReview = selectReview;
+        model.updateReview = updateReview;
+        model.deleteReview = deleteReview;
 
         function init() {
             getTvshowDetails();
@@ -152,7 +154,26 @@
                     reviews.push(tvshowReview[r]);
                 }
                 model.reviews = reviews;
-            }
+            } hasCriticReview();
+        }
+
+        function hasCriticReview() {
+            tvshowService
+                .findReviewsForTvshows(model.tvshowId)
+                .then(function (tvshows) {
+                    var criticReview= [];
+                    var userReview = [];
+                    for(var m in tvshows) {
+                        if(tvshows[m].isCritic == true) {
+                            criticReview.push(tvshows[r]);
+                        } else {
+                            userReview.push(tvshows[r]);
+                        }
+                    }
+                    model.criticReview = criticReview;
+                    model.userReview = userReview;
+                });
+
         }
 
         function createReview(summary, description) {
@@ -165,6 +186,7 @@
                 firstName      : model.isLoggedIn.firstName,
                 lastName       : model.isLoggedIn.lastName,
                 image          : model.isLoggedIn.image,
+                isCritic       : model.isLoggedIn.roles.indexOf('CRITIC') > -1,
                 summary        : summary,
                 description    : description
             };
@@ -177,6 +199,18 @@
 
         function selectReview(review) {
             model.review = angular.copy(review);
+        }
+        
+        function updateReview(review) {
+            tvshowService
+                .updateReview(review, review._id)
+                .then(findReviewsForTvshows);
+        }
+
+        function deleteReview(reviewId) {
+            tvshowService
+                .deleteReview(reviewId, model.isLoggedIn._id)
+                .then(findReviewsForTvshows);
         }
 
     }

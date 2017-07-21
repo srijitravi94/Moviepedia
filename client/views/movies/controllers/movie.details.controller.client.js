@@ -13,6 +13,8 @@
         model.undoWatchlistMovie = undoWatchlistMovie;
         model.createReview = createReview;
         model.selectReview = selectReview;
+        model.updateReview = updateReview;
+        model.deleteReview = deleteReview;
 
         function init() {
             getMovieDetails();
@@ -136,7 +138,26 @@
                     reviews.push(movieReview[r]);
                 }
                 model.reviews = reviews;
-            }
+            } hasCriticReview();
+        }
+
+        function hasCriticReview() {
+            movieService
+                .findReviewsForMovies(model.movieId)
+                .then(function (movies) {
+                    var criticReview= [];
+                    var userReview = [];
+                    for(var m in movies) {
+                        if(movies[m].isCritic == true) {
+                            criticReview.push(movies[r]);
+                        } else {
+                            userReview.push(movies[r]);
+                        }
+                    }
+                    model.criticReview = criticReview;
+                    model.userReview = userReview;
+                });
+
         }
 
         function createReview(summary, description) {
@@ -149,6 +170,7 @@
                 firstName      : model.isLoggedIn.firstName,
                 lastName       : model.isLoggedIn.lastName,
                 image          : model.isLoggedIn.image,
+                isCritic       : model.isLoggedIn.roles.indexOf('CRITIC') > -1,
                 summary        : summary,
                 description    : description
             };
@@ -160,6 +182,18 @@
 
         function selectReview(review) {
             model.review = angular.copy(review);
+        }
+
+        function updateReview(review) {
+            movieService
+                .updateReview(review, review._id)
+                .then(findReviewsForMovies);
+        }
+
+        function deleteReview(reviewId) {
+            movieService
+                .deleteReview(reviewId, model.isLoggedIn._id)
+                .then(findReviewsForMovies);
         }
     }
 })();

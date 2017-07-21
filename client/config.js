@@ -171,6 +171,116 @@
                     currentUser : checkLoggedIn,
                     isLoggedIn : isLoggedIn
                 }
+            })
+
+            //route for user reviews page
+            .when('/profile/:userId/reviews', {
+                templateUrl : 'views/user/templates/profile/reviews.profile.view.client.html',
+                controller : 'reviewsController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for user followers page
+            .when('/profile/:userId/followers', {
+                templateUrl : 'views/user/templates/profile/followers.profile.view.client.html',
+                controller : 'followerController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for user following page
+            .when('/profile/:userId/following', {
+                templateUrl : 'views/user/templates/profile/following.profile.view.client.html',
+                controller : 'followingController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for search user page
+            .when('/profile/:userId/search/users', {
+                templateUrl : 'views/user/templates/profile/search.users.profile.view.client.html',
+                controller : 'searchUsersController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for admin landing page
+            .when('/profile/:userId/admin', {
+                templateUrl : 'views/admin/templates/admin.view.client.html',
+                controller : 'adminController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkAdmin,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for admin users page
+            .when('/profile/:userId/admin/users', {
+                templateUrl : 'views/admin/templates/admin.users.view.client.html',
+                controller : 'adminUserController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkAdmin,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for admin critic application page
+            .when('/profile/:userId/admin/critics', {
+                templateUrl : 'views/admin/templates/admin.critic.view.client.html',
+                controller : 'adminCriticController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkAdmin,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for admin movie reviews page
+            .when('/profile/:userId/admin/movie/reviews', {
+                templateUrl : 'views/admin/templates/admin.movie.reviews.view.client.html',
+                controller : 'adminMovieReviewController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkAdmin,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for admin tvshow reviews page
+            .when('/profile/:userId/admin/tvshow/reviews', {
+                templateUrl : 'views/admin/templates/admin.tvshow.reviews.view.client.html',
+                controller : 'adminTvshowReviewController',
+                controllerAs : 'model',
+                resolve  : {
+                    currentUser : checkAdmin,
+                    isLoggedIn : isLoggedIn
+                }
+            })
+
+            //route for critic application
+            .when("/profile/:userId/critic/application", {
+                templateUrl : "views/critic/templates/critic.view.client.html",
+                controller : "criticController",
+                controllerAs : "model",
+                resolve : {
+                    currentUser : checkLoggedIn,
+                    isLoggedIn : isLoggedIn
+                }
             });
     }
 
@@ -199,6 +309,23 @@
             .then(function (user) {
                 if(user === '0') {
                     deferred.resolve({});
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
+    function checkAdmin(userService, $q, $location) {
+        var deferred = $q.defer();
+
+        userService
+            .checkAdmin()
+            .then(function (user) {
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/');
                 } else {
                     deferred.resolve(user);
                 }

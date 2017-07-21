@@ -12,6 +12,35 @@
                             </i>
                         </a>
                     </li>
+                    <li ng-controller="sidebarController as model">
+                        <img class="profile-picture"
+                             ng-src="{{model.user.image}}">
+                    </li>
+                    <li ng-if="model.userId === model.currentUser._id"
+                        ng-hide="model.currentUser.roles.indexOf('ADMIN')>-1 || model.currentUser.roles.indexOf('CRITIC')>-1"
+                        class="critic">
+                        <a ng-href="#/profile/{{model.userId}}/critic/application">
+                            <button class=" btn btn-primary btn-warning">
+                                Be a critic
+                            </button>
+                        </a>
+                    </li>
+                    <div ng-if="model.userId !== model.currentUser._id"
+                         class="follow">
+                        <button class=" btn btn-primary btn-success"
+                                ng-if="!model.isFollow"
+                                ng-click="model.follow(model.userId)">
+                            FOLLOW
+                        </button>
+                    </div>
+                    <div ng-if="model.userId !== model.currentUser._id"
+                         class="unfollow">
+                        <button class=" btn btn-primary btn-danger"
+                                ng-if="model.isFollow"
+                                ng-click="model.unfollow(model.userId)">
+                            UNFOLLOW
+                        </button>
+                    </div>
                     <li>
                         <a ng-href="#/profile/{{model.userId}}">
                             <i class="fa fa-cog fa-sidebar"
@@ -33,21 +62,27 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-comments fa-sidebar"
+                        <a ng-href="#/profile/{{model.userId}}/reviews"><i class="fa fa-comments fa-sidebar"
                                        aria-hidden="true"></i>
                             <span class="sidebar-list">Reviews</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-users fa-sidebar"
+                        <a href="#/profile/{{model.userId}}/followers"><i class="fa fa-users fa-sidebar"
                                         aria-hidden="true"></i>
                             <span class="sidebar-list">Followers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-users fa-sidebar"
+                        <a href="#/profile/{{model.userId}}/following"><i class="fa fa-users fa-sidebar"
                                        aria-hidden="true"></i>
                             <span class="sidebar-list">Following</span>
+                        </a>
+                    </li>
+                    <li ng-if="model.currentUser._id === model.userId">
+                        <a href="#/profile/{{model.userId}}/search/users">
+                            <i class="fa fa-user fa-sidebar" aria-hidden="true"></i>
+                            <span class="sidebar-list">Search Users</span>
                         </a>
                     </li>
                 </ul>
